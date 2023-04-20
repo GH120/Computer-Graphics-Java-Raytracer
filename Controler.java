@@ -67,6 +67,20 @@ public abstract class Controler extends Observable implements ActionListener, Ke
     return new Vetor(v1,v2,v3);
   }
 
+  Vetor getVetor(String id, int tamanho){
+
+    Double[] v = new Double[tamanho];
+
+    for(int i=1, i<=tamanho;i++){
+
+      v[i-1] = getValor(id + i);
+
+      if(v[i-1] == null) return null;
+    }
+
+    return new Vetor(...v);
+  }
+
   Double getValor(String id){
     
     if(!propriedades.containsKey(id)) return null;

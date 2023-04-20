@@ -38,7 +38,7 @@ public class NatalOtimizado extends Cena{
                            .setNormal(0,1,0)
                            .setKd(1,1,1)
                            .setKa(1,1,1)
-                           .setKe(0.0, 0.0, 0.0),
+                           .setKe(1.0, 1.0, 1.0),
                     "images.jpeg")
             .setEscala(3),
 
@@ -59,7 +59,11 @@ public class NatalOtimizado extends Cena{
                   .setKd(1.0, 0.078, 0.576)
                   .setKa(1., 0.078, 0.576)
                   .aplicar(
-                    new Translacao(-20,-150,-185)
+                    new Translacao(-20,-150,-185),
+                    new RotacaoZ(40),
+                    new RotacaoY(30),
+                    new RotacaoX(27),
+                    new Translacao(0,20,0)
                   ),
       
                   new Cone(0,-50,-200)
@@ -80,6 +84,12 @@ public class NatalOtimizado extends Cena{
               new Esfera(0,-25,-200)
               .setRaio(135)
             )
+            // .aplicar(
+            //   new RotacaoY(45)
+            // ) 
+            //Testar para todos os objetos centrados na origem, 
+            //Com todos eles em 0,0,0 aplicando matrizes de translação
+            //O que acontece quando rotaciona o conjunto é que alguns rotacionam e outros não
     );
 
     Fontes(

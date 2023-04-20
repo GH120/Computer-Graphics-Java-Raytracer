@@ -5,7 +5,6 @@ import modelos.Camera;
 import modelos.Ortografica;
 import modelos.Perspectiva;
 import modelos.Projecao;
-import modelos.cameras.*;
 
 public class CameraControler extends Controler{
 

@@ -21,6 +21,7 @@ public class ObjetoControler extends Controler{
     super.setupPropriedades();
 
     setupCor();
+    setupCoordenadas();
 
     if(selecionado instanceof Textura){
       Textura textura = (Textura) selecionado;
@@ -52,6 +53,39 @@ public class ObjetoControler extends Controler{
     propriedades.put("Ke1", "" + Ke.get(0));
     propriedades.put("Ke2", "" + Ke.get(1));
     propriedades.put("Ke3", "" + Ke.get(2));
+  }
+
+  void setupCoordenadas(){
+
+    if(selecionado == null) return;
+    
+    Vetor L1 = selecionado.toWorld.getLinha(0);
+
+    propriedades.put("L11", "" + L1.get(0));
+    propriedades.put("L12", "" + L1.get(1));
+    propriedades.put("L13", "" + L1.get(2));
+    propriedades.put("L14", "" + L1.get(3));
+
+    Vetor L2 = selecionado.toWorld.getLinha(1);
+
+    propriedades.put("L21", "" + L2.get(0));
+    propriedades.put("L22", "" + L2.get(1));
+    propriedades.put("L23", "" + L2.get(2));
+    propriedades.put("L24", "" + L2.get(3));
+
+    Vetor L3 = selecionado.toWorld.getLinha(2);
+
+    propriedades.put("L31", "" + L3.get(0));
+    propriedades.put("L32", "" + L3.get(1));
+    propriedades.put("L33", "" + L3.get(2));
+    propriedades.put("L34", "" + L3.get(3));
+
+    Vetor L4 = selecionado.toWorld.getLinha(3);
+
+    propriedades.put("L41", "" + L4.get(0));
+    propriedades.put("L42", "" + L4.get(1));
+    propriedades.put("L43", "" + L4.get(2));
+    propriedades.put("L44", "" + L4.get(3));
   }
 
   void compilar(){

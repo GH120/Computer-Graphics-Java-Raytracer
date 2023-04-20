@@ -42,6 +42,18 @@ class ComponentsUI extends JPanel{
     labelAlg.setBorder(BorderFactory.createLineBorder(new Color(0x7f7f7f), 1));
     this.add(labelAlg, BorderLayout.PAGE_START);
     
+    JPanel matriz = new JPanel(){{
+      
+        setPreferredSize(new Dimension(125, 72));
+        setLayout(new GridLayout(4, 4, 0, 0));
+
+        this.add(new Row("L1", controler,4));
+        this.add(new Row("L2", controler,4));
+        this.add(new Row("L3", controler,4));
+        this.add(new Row("L4", controler,4));
+    }};
+
+    this.add(matriz, BorderLayout.CENTER);
   }
 }
 
@@ -174,5 +186,34 @@ class Row extends JPanel {
     textOrigem.setBackground(new Color(0xD3D3D3));
     textOrigem.addKeyListener(controler);
     this.add(textOrigem);
+  }
+
+  Row(String name, Controler controler, int tamanho){
+
+    GridLayout layout = new GridLayout();
+    layout.setHgap(0);
+    layout.setVgap(0);
+
+    setPreferredSize(new Dimension(125, 24));
+    setLayout(layout);
+
+    JButton button = new JButton(name);
+    button.setPreferredSize(new Dimension(125, 24));
+    button.setFont(new Font("ALGERIAN", Font.BOLD, 8));
+    button.setBackground(new Color(0xD3D3D3));
+    button.setBorder(null);
+    this.add(button);
+    button.setFocusable(false);
+    
+    for(int i=1;i<tamanho+1;i++){
+      Text textOrigem = new Text("...");
+      textOrigem.setHorizontalAlignment(Text.CENTER);
+      textOrigem.setActionCommand(controler, name + i);
+      textOrigem.setPreferredSize(new Dimension(125, 24));
+      textOrigem.setFont(new Font("ALGERIAN", Font.BOLD, 8));
+      textOrigem.setBackground(new Color(0xD3D3D3));
+      textOrigem.addKeyListener(controler);
+      this.add(textOrigem);
+    }
   }
 }

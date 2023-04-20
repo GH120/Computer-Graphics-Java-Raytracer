@@ -5,7 +5,7 @@ public class Raio{
 
   public int profundidade;
   public int linha;
-public int coluna;
+  public int coluna;
 
   public Vetor intensidade;
   public Vetor origem;
