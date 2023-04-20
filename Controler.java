@@ -69,16 +69,16 @@ public abstract class Controler extends Observable implements ActionListener, Ke
 
   Vetor getVetor(String id, int tamanho){
 
-    Double[] v = new Double[tamanho];
+    double[] v = new double[tamanho];
 
-    for(int i=1, i<=tamanho;i++){
+    for(int i=1; i<=tamanho;i++){
 
-      v[i-1] = getValor(id + i);
-
-      if(v[i-1] == null) return null;
+      if(getValor(id + i) != null) 
+        
+          v[i-1] = getValor(id + i);
     }
 
-    return new Vetor(...v);
+    return new Vetor(v);
   }
 
   Double getValor(String id){

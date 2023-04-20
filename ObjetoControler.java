@@ -94,8 +94,14 @@ public class ObjetoControler extends Controler{
     Vetor Ke = getVetor("Ke");
     Vetor Ka = getVetor("Ka");
 
+    Vetor L1 = getVetor("L1", 4);
+    Vetor L2 = getVetor("L2", 4);
+    Vetor L3 = getVetor("L3", 4);
+    Vetor L4 = getVetor("L4", 4);
+
     try{
       mudarCoeficientes(Kd,Ke,Ka);
+      // mudarCoordenadas(L1,L2,L3,L4); => calcular inversa da matriz
     }
     catch(Exception e){
       System.out.println("Coeficientes mal tipados");
