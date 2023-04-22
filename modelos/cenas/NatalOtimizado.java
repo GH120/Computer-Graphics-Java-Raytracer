@@ -93,7 +93,7 @@ public class NatalOtimizado extends Cena{
     );
 
     Fontes(
-      new Fonte(-100, 140, -20).setCor(0.7f,0.7f,0.7f)
+      new Fonte(-100, 140, -20).setCor(0.1f,0.1f,0.1f)
     );
   }
 }

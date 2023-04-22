@@ -45,7 +45,7 @@ class Main {
     
     new Programa().setCena(
                             cena
-                            .luzAmbiente(0.2,0.2,0.2)
+                            .luzAmbiente(0.1,0.1,0.1)
                   )
                   .setTracer(tracer)
                   .getCamera(index)

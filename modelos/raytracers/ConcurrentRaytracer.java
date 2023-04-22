@@ -3,13 +3,10 @@ import algebra.*;
 import modelos.*;
 
 import java.util.*;
-import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.ThreadPoolExecutor;
 
 public class ConcurrentRaytracer extends Raytracer{
 
@@ -29,15 +26,15 @@ public class ConcurrentRaytracer extends Raytracer{
       final int threadLinhas = linhas/NUM_THREADS;
       final int threadIndex  = i;
 
-        Vetor[][] linhasBuffer = new Vetor[linhas][colunas];
+        Vetor[][] linhasBuffer = new Vetor[threadLinhas][colunas];
 
-        for(int j=0;j<linhas;j++)
+        for(int j=0;j<threadLinhas;j++)
           for(int k=0;k<colunas;k++)
             linhasBuffer[j][k] = new Vetor(0,0,0);
 
         Callable<Void> processo = () -> {
 
-            LinkedList<Raio> linhasDoProcesso = renderLinhas(threadIndex);
+            LinkedList<Raio> linhasDoProcesso = renderLinhas(threadIndex, threadLinhas);
 
             while(!linhasDoProcesso.isEmpty()){
 
@@ -51,10 +48,11 @@ public class ConcurrentRaytracer extends Raytracer{
 
             }
 
-            for(int j=0;j<threadLinhas;j++)
+            for(int j=0;j<threadLinhas;j++){
               for(int k=0;k<colunas;k++){
-                buffer[k][j*NUM_THREADS + threadIndex] = buffer[k][j*NUM_THREADS + threadIndex].mais(linhasBuffer[j*NUM_THREADS + threadIndex][k]);
+                buffer[k][j*NUM_THREADS + threadIndex] = buffer[k][j*NUM_THREADS + threadIndex].mais(linhasBuffer[j][k]);
               }
+            }
 
             return null;
         };
@@ -94,7 +92,7 @@ public class ConcurrentRaytracer extends Raytracer{
     return luz.mult(raio.intensidade);
   }
 
-  LinkedList<Raio> renderLinhas(int processo) {
+  LinkedList<Raio> renderLinhas(int processo, int tamanho) {
 
     LinkedList<Raio> raios = new LinkedList<>();
 
@@ -104,8 +102,8 @@ public class ConcurrentRaytracer extends Raytracer{
     double deltax = w / linhas;
     double deltay = h / colunas;
 
-    for (int l = processo; l < linhas; l=l+NUM_THREADS) {
-      double y = h / 2 - deltay / 2 - deltay * l;
+    for (int l = 0; l < tamanho; l++) {
+      double y = h / 2 - deltay / 2 - deltay * (l*NUM_THREADS + processo);
       for (int c = 0; c < colunas; c++) {
         double x = w / 2 - deltax / 2 - deltax * c;
         
