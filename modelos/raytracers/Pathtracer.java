@@ -7,7 +7,12 @@ import modelos.*;
 
 public class Pathtracer extends Raytracer {
 
-  LinkedList<Raio> raios;
+  LinkedList<Raio>  raios;
+  int               depth;
+
+  public Pathtracer(int depth){
+    this.depth = depth;
+  }
 
   public void dispararRaios() {
 
@@ -32,7 +37,7 @@ public class Pathtracer extends Raytracer {
       return new Vetor(0,0,0);
 
     //Reflexão: adiciona a pilha o novo raio
-    if(raio.profundidade < 1){
+    if(raio.profundidade < depth){
       
       Raio reflexao = raio.reflexao(ponto);
       

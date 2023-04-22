@@ -14,6 +14,11 @@ import java.util.concurrent.ThreadPoolExecutor;
 public class ConcurrentRaytracer extends Raytracer{
 
   private static final int NUM_THREADS = Runtime.getRuntime().availableProcessors();
+  private              int depth;
+
+  public ConcurrentRaytracer(int depth){
+    this.depth = depth;
+  }
 
   public void dispararRaios() {
 
@@ -77,7 +82,7 @@ public class ConcurrentRaytracer extends Raytracer{
       return new Vetor(0,0,0);
 
     //Reflexão: adiciona a pilha o novo raio
-    if(raio.profundidade < 1){
+    if(raio.profundidade < depth){
       
       Raio reflexao = raio.reflexao(ponto);
       
