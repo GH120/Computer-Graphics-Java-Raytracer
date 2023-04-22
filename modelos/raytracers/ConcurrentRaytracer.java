@@ -13,52 +13,48 @@ import java.util.concurrent.ThreadPoolExecutor;
 
 public class ConcurrentRaytracer extends Raytracer{
 
-  private static final int                 NUM_THREADS = Runtime.getRuntime().availableProcessors();
-  private static final BlockingQueue<Raio> raios = new LinkedBlockingQueue<>();
+  private static final int NUM_THREADS = Runtime.getRuntime().availableProcessors();
 
   public void dispararRaios() {
 
     ExecutorService executorService = Executors.newFixedThreadPool(NUM_THREADS);
 
-    System.out.println(NUM_THREADS);
-
-    gerarRaios();
-
     for(int i=0; i < NUM_THREADS;i++){
 
-        Callable<Void> task = () -> {
+      final int threadLinhas = linhas/NUM_THREADS;
+      final int threadIndex  = i;
 
-            while(!raios.isEmpty()){
+        Vetor[][] linhasBuffer = new Vetor[linhas][colunas];
 
-                // Raio[] listaDeRaios = new Raio[10];
+        for(int j=0;j<linhas;j++)
+          for(int k=0;k<colunas;k++)
+            linhasBuffer[j][k] = new Vetor(0,0,0);
 
-                // synchronized(raios){
-                //     for(int k=0; k< 10 && !raios.isEmpty(); k++){
-                //         listaDeRaios[k] = raios.poll();
-                //     }
-                // }
-                //Concurrency not working, maybe need to change approach
-                //Make temporary buffer to hold ray information
-                //When depth increases, sum buffers
-                synchronized(this){
+        Callable<Void> processo = () -> {
 
-                    Raio raio = raios.poll();
+            LinkedList<Raio> linhasDoProcesso = renderLinhas(threadIndex);
 
-                    // for(Raio raio : raios){
+            while(!linhasDoProcesso.isEmpty()){
 
-                        int l = raio.linha; int c = raio.coluna;
+              Raio raio = linhasDoProcesso.poll();
 
-                        Vetor cor = buscaCor(raio);
+              int l = raio.linha; int c = raio.coluna;
 
-                        buffer[c][l] = buffer[c][l].mais(cor);
-                    // }
-                }
+              Vetor cor = buscaCor(raio, linhasDoProcesso);
+
+              linhasBuffer[l][c] = linhasBuffer[l][c].mais(cor);
+
             }
+
+            for(int j=0;j<threadLinhas;j++)
+              for(int k=0;k<colunas;k++){
+                buffer[k][j*NUM_THREADS + threadIndex] = buffer[k][j*NUM_THREADS + threadIndex].mais(linhasBuffer[j*NUM_THREADS + threadIndex][k]);
+              }
 
             return null;
         };
 
-        executorService.submit(task);
+        executorService.submit(processo);
 
     }
 
@@ -72,7 +68,7 @@ public class ConcurrentRaytracer extends Raytracer{
     }
   }
 
-  Vetor buscaCor(Raio raio) {
+  Vetor buscaCor(Raio raio, LinkedList<Raio> linhas) {
 
     Ponto ponto = cena.objetos.colisao(raio.origem,
         raio.direcao);
@@ -85,7 +81,7 @@ public class ConcurrentRaytracer extends Raytracer{
       
       Raio reflexao = raio.reflexao(ponto);
       
-      raios.offer(reflexao);
+      linhas.offer(reflexao);
     }
     
     Vetor luz = iluminar(ponto, raio.direcao);
@@ -93,7 +89,9 @@ public class ConcurrentRaytracer extends Raytracer{
     return luz.mult(raio.intensidade);
   }
 
-  void gerarRaios() {
+  LinkedList<Raio> renderLinhas(int processo) {
+
+    LinkedList<Raio> raios = new LinkedList<>();
 
     double w = camera.wJanela;
     double h = camera.hJanela;
@@ -101,17 +99,19 @@ public class ConcurrentRaytracer extends Raytracer{
     double deltax = w / linhas;
     double deltay = h / colunas;
 
-    for (int l = 0; l < linhas; l++) {
+    for (int l = processo; l < linhas; l=l+NUM_THREADS) {
       double y = h / 2 - deltay / 2 - deltay * l;
       for (int c = 0; c < colunas; c++) {
         double x = w / 2 - deltax / 2 - deltax * c;
         
-        gerarRaio(x, y, c, l);
+        raios.add(gerarRaio(x, y, c, l));
       }
     }
+
+    return raios;
   }
 
-  void gerarRaio(double x, double y, int c, int l) {
+  Raio gerarRaio(double x, double y, int c, int l) {
 
     Raio raio = new Raio();
 
@@ -131,7 +131,6 @@ public class ConcurrentRaytracer extends Raytracer{
     raio.origem = raio.origem.tresD();
     raio.direcao = raio.direcao.tresD();
 
-    raios.add(raio);
-
+    return raio;
   }
 }
