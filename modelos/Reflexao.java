@@ -23,9 +23,8 @@ import java.util.List;
 
 public abstract class Reflexao {
 
-    int pixelCount;
-
-    double eficiencia;
+    int    pixelCount;
+    double eficiencia = 1.0;
 
     abstract void refletir(Ponto ponto, Raio raio, List<Raio> raios);
 }
@@ -36,9 +35,9 @@ class Especular extends Reflexao{
 
         Raio refletido = raio.reflexao(ponto);
 
-        refletido.intensidade.vezes(eficiencia);
+        refletido.intensidade = refletido.intensidade.vezes(eficiencia);
 
-        raios.add(raio);
+        raios.add(refletido);
     }
 
     public Raio reflexao(Ponto ponto, Raio raio){
@@ -73,11 +72,16 @@ class Glossy extends Reflexao{
 
     void refletir(Ponto ponto, Raio raio, List<Raio> raios){
 
-        Raio refletido = raio.reflexao(ponto);
+        eficiencia = eficiencia/pixelCount;
 
-        refletido.intensidade.vezes(eficiencia);
+        for(int i=0; i < pixelCount;i++){
 
-        raios.add(raio);
+            Raio refletido = reflexao(ponto, raio);
+
+            refletido.intensidade = refletido.intensidade.vezes(eficiencia);
+            
+            raios.add(refletido);
+        }
     }
 
     public Raio reflexao(Ponto ponto, Raio raio) {
@@ -114,3 +118,10 @@ class Glossy extends Reflexao{
     }
     
 }
+
+// class Refracao extends Reflexao{
+
+//     void reflexao(Ponto ponto, Raio raio){
+
+//     }
+// }
