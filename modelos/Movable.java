@@ -71,6 +71,12 @@ public class Movable{
     return new Translacao(posicao[0],posicao[1],posicao[2]);
   }
 
+  public Movable aplicarSimples(Matriz ...matrizes){
+    for(Matriz matriz : matrizes)
+      apply(matriz);
+    return this;
+  }
+
   //Transforma vetor para coordenadas de mundo
   public Vetor toWorld(Vetor vetor) {
     return toWorld.vezes(vetor);

@@ -10,6 +10,7 @@ import java.util.TimerTask;
 
 import modelos.*;
 import modelos.cenas.*;
+import modelos.objetos.*;
 import modelos.raytracers.*;
 
 class Main {
@@ -41,6 +42,14 @@ class Main {
     // raio.direcao = new Vetor(0,-120,-150).unitario();
 
     // node.colisao(raio);
+
+    Conjunto conjunto = (Conjunto)cena.objetos.componentes.get(5);
+
+    Composto cubo = (Composto) conjunto.componentes.get(1);
+
+    Objeto triangulo = cubo.componentes.get(0);
+
+    triangulo.toWorld.printar();
     
     
     new Programa().setCena(
