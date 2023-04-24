@@ -47,6 +47,16 @@ public class Raio{
     return refletido;
   }
 
+  Raio refletido(){
+
+    Raio refletido = new Raio(profundidade+1);
+
+    refletido.linha = linha;
+    refletido.coluna = coluna;
+
+    return refletido;
+  }
+
   void printar(){
     System.out.println("Intensidade:");
     intensidade.printar();

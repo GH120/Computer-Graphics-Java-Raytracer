@@ -43,10 +43,7 @@ class Especular extends Reflexao{
 
     public Raio reflexao(Ponto ponto, Raio raio){
 
-        Raio refletido = new Raio(raio.profundidade+1);
-    
-        refletido.linha  = raio.linha;
-        refletido.coluna = raio.coluna;
+        Raio refletido = raio.refletido();
         
     
         //Direção muda para o raio refletido no ponto
@@ -85,23 +82,23 @@ class Glossy extends Reflexao{
 
     public Raio reflexao(Ponto ponto, Raio raio) {
 
-        Raio refletido = new Raio(raio.profundidade+1);
-        refletido.linha = raio.linha;
-        refletido.coluna = raio.coluna;
+        Raio refletido = raio.refletido();
     
         // Direction of ideal reflection
         Vetor reflexaoIdeal = raio.direcao.menos(
             ponto.normal.vezes(2 * raio.direcao.escalar(ponto.normal))
         ).unitario();
     
-        // Randomly perturb the reflected direction around the ideal reflection direction
         double theta = Math.acos(Math.pow(Math.random(), 1.0 / (roughness + 1)));
+
         double phi = 2 * Math.PI * Math.random();
+
         Vetor reflexaoPerturbada = new Vetor(
             Math.sin(theta) * Math.cos(phi),
             Math.sin(theta) * Math.sin(phi),
             Math.cos(theta)
         );
+
         Vetor reflexaoFinal = reflexaoPerturbada.mais(reflexaoIdeal).unitario();
     
         // Reflected ray has origin at collision point
