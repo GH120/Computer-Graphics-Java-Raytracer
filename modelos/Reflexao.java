@@ -190,3 +190,7 @@ class Refracao extends Especular{
         return refratado;
     }
 }
+
+abstract class MonteCarlo{}
+
+//Material has reflections, => objeto.material.reflect(ponto,raio,raios);

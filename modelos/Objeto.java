@@ -1,13 +1,17 @@
 package modelos;
+import java.util.ArrayList;
 import algebra.*;
 
 public abstract class Objeto extends Movable{ 
-  
-  //INDICES DE REFLEXIVIDADE DIFUSA E ESPECULAR
-  Vetor Kd,Ke,Ka;
 
-  //RETORNA O PONTO DE COLISÂO COM O RAIO
+  Vetor Ke, Ka, Kd;
+
+  ArrayList<Reflexao> reflexoes = null;
+  
   public abstract Ponto colisao(Vetor p0, Vetor dr);
+
+
+  //Funções úteis abaixo
 
   //RETORNA UM PONTO DESSE OBJETO
   protected Ponto getPonto(Vetor pi, Vetor normal){

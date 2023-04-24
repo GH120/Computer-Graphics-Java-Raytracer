@@ -43,13 +43,13 @@ class Main {
 
     // node.colisao(raio);
 
-    Conjunto conjunto = (Conjunto)cena.objetos.componentes.get(5);
+    // Conjunto conjunto = (Conjunto)cena.objetos.componentes.get(5);
 
-    Composto cubo = (Composto) conjunto.componentes.get(1);
+    // Composto cubo = (Composto) conjunto.componentes.get(1);
 
-    Objeto triangulo = cubo.componentes.get(0);
+    // Objeto triangulo = cubo.componentes.get(0);
 
-    triangulo.toWorld.printar();
+    // triangulo.toWorld.printar();
     
     
     new Programa().setCena(
