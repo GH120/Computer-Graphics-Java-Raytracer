@@ -33,7 +33,7 @@ class Especular extends Reflexao{
 
     void refletir(Ponto ponto, Raio raio, List<Raio> raios){
 
-        Raio refletido = raio.reflexao(ponto);
+        Raio refletido = reflexao(ponto, raio);
 
         refletido.intensidade = refletido.intensidade.vezes(eficiencia);
 
@@ -43,6 +43,12 @@ class Especular extends Reflexao{
     public Raio reflexao(Ponto ponto, Raio raio){
 
         Raio refletido = raio.refletido();
+
+        if(raio.interno){ 
+            ponto = new Ponto(ponto.objeto, 
+                              ponto.pos,
+                              ponto.normal.vezes(-1));
+        }
         
     
         //Direção muda para o raio refletido no ponto
@@ -87,6 +93,12 @@ class Glossy extends Reflexao{
     public Raio reflexao(Ponto ponto, Raio raio) {
 
         Raio refletido = raio.refletido();
+
+        if(raio.interno){
+            ponto = new Ponto(ponto.objeto, 
+                              ponto.pos,
+                              ponto.normal.vezes(-1));
+        }
     
         // Direction of ideal reflection
         Vetor reflexaoIdeal = raio.direcao.menos(
@@ -119,9 +131,62 @@ class Glossy extends Reflexao{
     
 }
 
-// class Refracao extends Reflexao{
+class Refracao extends Especular{
 
-//     void reflexao(Ponto ponto, Raio raio){
+    double indiceRefracao;
 
-//     }
-// }
+    public void refletir(Ponto ponto, Raio raio, List<Raio> raios){  
+        raios.add(refracao(ponto, raio));
+    }
+
+    public Raio refracao(Ponto ponto, Raio raio) {
+    
+        Vetor normal = ponto.normal;
+        double cosI = -raio.direcao.escalar(normal);
+    
+        double n1, n2;
+
+        if (raio.interno) {
+            // Ray is exiting the object, so swap refractive indices
+            n1 = indiceRefracao;
+            n2 = 1.0;
+            ponto = new Ponto(ponto.objeto, ponto.pos, ponto.normal.vezes(-1.0));
+        } else {
+            // Ray is entering the object
+            n1 = 1.0;
+            n2 = indiceRefracao;
+        }
+    
+        double eta = n1 / n2;
+        double k = 1.0 - eta * eta * (1.0 - cosI * cosI);
+    
+        if (k < 0.0) {
+            Raio refletido = super.reflexao(ponto, raio);
+
+            refletido.interno = true;
+
+            return refletido;
+        }
+    
+        Vetor direcaoRefratada = raio.direcao.vezes(eta)
+                .mais(normal.vezes(eta * cosI - Math.sqrt(k)))
+                .unitario();
+        
+        
+        Raio refratado = raio.refletido();
+    
+        // Refracted ray has origin at collision point
+        refratado.origem = ponto.pos.mais(direcaoRefratada);
+    
+        // Refracted ray has direction of refracted vector
+        refratado.direcao = direcaoRefratada;
+    
+        // Intensity is reduced by the transmission factor
+        refratado.intensidade = raio.intensidade.vezes(eficiencia);
+
+        // Raio muda de meio físico
+        refratado.interno = !raio.interno;
+    
+        return refratado;
+    }
+}

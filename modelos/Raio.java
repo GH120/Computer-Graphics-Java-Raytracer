@@ -3,9 +3,10 @@ import algebra.*;
 
 public class Raio{
 
-  public int profundidade;
-  public int linha;
-  public int coluna;
+  public int      profundidade;
+  public int      linha;
+  public int      coluna;
+  public boolean  interno;
 
   public Vetor intensidade;
   public Vetor origem;
@@ -13,10 +14,12 @@ public class Raio{
 
   public Raio(){
     profundidade = 0;
+    interno = false;
   }
 
   Raio(int iteracao){
     profundidade = iteracao;
+    interno = false;
   }
 
   public Raio reflexao(Ponto ponto){
@@ -51,8 +54,9 @@ public class Raio{
 
     Raio refletido = new Raio(profundidade+1);
 
-    refletido.linha = linha;
-    refletido.coluna = coluna;
+    refletido.linha   = linha;
+    refletido.coluna  = coluna;
+    refletido.interno = interno;
 
     return refletido;
   }
