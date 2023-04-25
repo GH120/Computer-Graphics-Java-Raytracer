@@ -6,9 +6,15 @@ import modelos.Ponto;
 import modelos.Raio;
 
 //Falta adicionar o construtor...
-class Glossy extends Reflexao{
+public class Glossy extends Reflexao{
 
     double roughness;
+
+    Glossy(double roughness, int pixelCount, double eficiencia){
+        this.roughness  = roughness;
+        this.eficiencia = eficiencia;
+        this.pixelCount = pixelCount;
+    }
 
     public void refletir(Ponto ponto, Raio raio, List<Raio> raios){
 

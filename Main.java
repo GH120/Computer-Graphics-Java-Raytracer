@@ -21,10 +21,10 @@ class Main {
   public static void main(String[] args) {
     
       rodarPrograma(
-                    new NatalOtimizado(),            //Cena escolhida
-                    new ConcurrentRaytracer(10),        //Raytracer escolhido
-                    750, 750,  //Resolução
-                    CAMERA_PERSPECTIVA      //Câmera da cena escolhida
+                    new NatalOtimizado(),                  //Cena escolhida
+                    new ConcurrentRaytracer(10),    //Raytracer escolhido
+                    750, 750,               //Resolução
+                    CAMERA_PERSPECTIVA                   //Câmera da cena escolhida
       );
     
   }

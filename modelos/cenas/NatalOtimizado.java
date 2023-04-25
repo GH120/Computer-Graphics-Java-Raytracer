@@ -4,6 +4,7 @@ import modelos.*;
 import modelos.fontes.*;
 import modelos.objetos.*;
 import modelos.reflexoes.Especular;
+import modelos.reflexoes.Glossy;
 
 public class NatalOtimizado extends Cena{
 
@@ -43,7 +44,7 @@ public class NatalOtimizado extends Cena{
                            .setKe(1.0, 1.0, 1.0),
                     "images.jpeg")
             .setEscala(3)
-            .addReflection(new Especular()),
+            .addReflection(new Glossy()),
 
             (Conjunto)
             new Conjunto
