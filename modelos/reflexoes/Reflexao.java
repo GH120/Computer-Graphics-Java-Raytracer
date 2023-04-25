@@ -1,6 +1,5 @@
 package modelos.reflexoes;
 
-import algebra.*;
 import modelos.Ponto;
 import modelos.Raio;
 
