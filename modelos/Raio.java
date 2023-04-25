@@ -50,7 +50,7 @@ public class Raio{
     return refletido;
   }
 
-  Raio refletido(){
+  public Raio refletido(){
 
     Raio refletido = new Raio(profundidade+1);
 

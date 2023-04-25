@@ -1,12 +1,13 @@
 package modelos;
-import java.util.ArrayList;
+// import java.util.ArrayList;
 import algebra.*;
+import modelos.reflexoes.Reflexao;
 
 public abstract class Objeto extends Movable{ 
 
   Vetor Ke, Ka, Kd;
 
-  ArrayList<Reflexao> reflexoes = null;
+  public Reflexao reflexao = null;
   
   public abstract Ponto colisao(Vetor p0, Vetor dr);
 
@@ -84,5 +85,12 @@ public abstract class Objeto extends Movable{
     if(centro.menos(pos).modulo() < tamanho) return true;
 
     return false;
+  }
+
+  public Objeto addReflection(Reflexao reflexao){
+
+    this.reflexao = reflexao;
+
+    return this;
   }
 }

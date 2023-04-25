@@ -1,6 +1,7 @@
 package modelos.raytracers;
 import algebra.*;
 import modelos.*;
+import modelos.reflexoes.Reflexao;
 
 import java.util.*;
 import java.util.concurrent.Callable;
@@ -79,12 +80,12 @@ public class ConcurrentRaytracer extends Raytracer{
     if (ponto == null)
       return new Vetor(0,0,0);
 
-    //Reflexão: adiciona a pilha o novo raio
     if(raio.profundidade < depth){
-      
-      Raio reflexao = raio.reflexao(ponto);
-      
-      linhas.offer(reflexao);
+
+      Reflexao superficie = ponto.objeto.reflexao;
+
+      if(superficie != null) superficie.refletir(ponto, raio, linhas);
+
     }
     
     Vetor luz = iluminar(ponto, raio.direcao);

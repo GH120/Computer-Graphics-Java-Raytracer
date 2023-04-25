@@ -3,6 +3,7 @@ import algebra.*;
 import modelos.*;
 import modelos.fontes.*;
 import modelos.objetos.*;
+import modelos.reflexoes.Especular;
 
 public class NatalOtimizado extends Cena{
 
@@ -31,7 +32,8 @@ public class NatalOtimizado extends Cena{
             .setNormal(0,-1,0)
             .setKd(0.933, 0.933, 0.933)
             .setKa(0.933, 0.933, 0.933)
-            .setKe(0.933, 0.933, 0.933),
+            .setKe(0.933, 0.933, 0.933)
+            .addReflection(new Especular()),
 
             new Piso(
                     (Plano) new Plano(0,-150,0)
@@ -40,7 +42,8 @@ public class NatalOtimizado extends Cena{
                            .setKa(1,1,1)
                            .setKe(1.0, 1.0, 1.0),
                     "images.jpeg")
-            .setEscala(3),
+            .setEscala(3)
+            .addReflection(new Especular()),
 
             (Conjunto)
             new Conjunto
@@ -84,6 +87,7 @@ public class NatalOtimizado extends Cena{
               new Esfera(0,-25,-200)
               .setRaio(135)
             )
+            .addReflection(new Especular())
             // .aplicar(
             //   new RotacaoY(45)
             // ) 

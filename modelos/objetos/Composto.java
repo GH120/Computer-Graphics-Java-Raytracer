@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 import algebra.*;
 import modelos.*;
+import modelos.reflexoes.Reflexao;
 
 public abstract class Composto extends Objeto{
   
@@ -93,6 +94,16 @@ public abstract class Composto extends Objeto{
       componente.aplicar(matrizes);
     }
     
+    return this;
+  }
+
+  @Override
+  public Composto addReflection(Reflexao reflexao){
+
+    for(Objeto componente : componentes){
+      componente.addReflection(reflexao);
+    }
+
     return this;
   }
 
