@@ -8,7 +8,7 @@ public abstract class Raytracer{
 
   public int linhas;
 
-public int colunas;
+  public int colunas;
   
   public Vetor[][] buffer;
 

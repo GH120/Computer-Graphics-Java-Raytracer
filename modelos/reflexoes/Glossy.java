@@ -10,7 +10,7 @@ public class Glossy extends Reflexao{
 
     double roughness;
 
-    Glossy(double roughness, int pixelCount, double eficiencia){
+    public Glossy(double roughness, int pixelCount, double eficiencia){
         this.roughness  = roughness;
         this.eficiencia = eficiencia;
         this.pixelCount = pixelCount;

@@ -44,7 +44,7 @@ public class NatalOtimizado extends Cena{
                            .setKe(1.0, 1.0, 1.0),
                     "images.jpeg")
             .setEscala(3)
-            .addReflection(new Glossy()),
+            .addReflection(new Especular()),
 
             (Conjunto)
             new Conjunto
@@ -96,6 +96,8 @@ public class NatalOtimizado extends Cena{
             //Com todos eles em 0,0,0 aplicando matrizes de translação
             //O que acontece quando rotaciona o conjunto é que alguns rotacionam e outros não
     );
+
+    objetos.addReflection(new Especular());
 
     Fontes(
       new Fonte(-100, 140, -20).setCor(0.1f,0.1f,0.1f)
