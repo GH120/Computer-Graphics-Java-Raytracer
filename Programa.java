@@ -27,13 +27,13 @@ public class Programa {
 
   public Programa() {
     window = new JFrame();
-    window.setSize(new Dimension(750, 750));
+    window.setSize(new Dimension(500, 500));
     window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     window.setLayout(new BorderLayout());
     window.setFocusable(true);
 
     canvas = new Tela();
-    canvas.setPreferredSize(new Dimension(750, 650));
+    canvas.setPreferredSize(new Dimension(500, 450));
     canvas.addMouseListener(new Picking(this)); // Adiciona a o controler de picking ao canvas
 
     window.add(canvas, BorderLayout.NORTH);

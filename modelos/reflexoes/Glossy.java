@@ -24,8 +24,14 @@ public class Glossy extends Reflexao{
 
             Raio refletido = reflexao(ponto, raio);
 
+            if(refletido.intensidade.escalar(refletido.intensidade) < 0.01) continue;
+
             refletido.intensidade = refletido.intensidade.vezes(eficiencia);
-            
+
+            if(refletido.intensidade.modulo() > 0) {
+                refletido.intensidade.printar();
+                System.out.println(refletido.profundidade);
+            }
             raios.add(refletido);
         }
     }

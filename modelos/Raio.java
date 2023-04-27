@@ -61,7 +61,7 @@ public class Raio{
     return refletido;
   }
 
-  void printar(){
+  public void printar(){
     System.out.println("Intensidade:");
     intensidade.printar();
     System.out.println("Origem:");

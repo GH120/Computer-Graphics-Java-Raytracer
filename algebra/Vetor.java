@@ -112,6 +112,17 @@ public class Vetor{
     return new Vetor(x,y,z);
   }
 
+  public Vetor ortogonal() {
+    Vetor a = new Vetor(1, 0, 0);
+    if (a.escalar(this) == 1) {
+        a = new Vetor(0, 1, 0);
+    }
+    Vetor n = vetorial(a);
+    Vetor b = n.vetorial(this);
+    return b.unitario();
+  }
+
+
   //Basicamente um vezes entre vetores
   public Matriz produtoExterno(Vetor vetor){
 

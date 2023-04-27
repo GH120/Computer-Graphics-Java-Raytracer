@@ -130,3 +130,6 @@ Vetor.class
 Vetorial.class
 ComponentsUI$1.class
 modelos/raytracers/ConcurrentRaytracer.class
+modelos/reflexoes/MonteCarlo.class
+modelos/reflexoes/Glossy.class
+modelos/reflexoes/Especular.class
