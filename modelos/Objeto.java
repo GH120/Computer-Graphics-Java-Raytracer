@@ -5,11 +5,12 @@ import modelos.reflexoes.Superficie;
 
 public abstract class Objeto extends Movable{ 
 
-  Vetor Ke, Ka, Kd;
+  private    Vetor   Ke, Ka, Kd;
+  public  Superficie superficie = null;
 
-  public Superficie superficie = null;
-  
+
   public abstract Ponto colisao(Vetor p0, Vetor dr);
+
 
   public Objeto setKe(double ...rgb){
     Ke = new Vetor(rgb);

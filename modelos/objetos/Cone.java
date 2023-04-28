@@ -4,8 +4,8 @@ import modelos.*;
 
 public class Cone extends Composto{
 
-  Vetor base, dir, vertice;
-  double altura, raio;
+  Vetor   base, dir, vertice;
+  double  altura, raio;
   Circulo inferior;
 
   public Cone(double ...eixos){
