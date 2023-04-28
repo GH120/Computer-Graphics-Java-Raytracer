@@ -4,7 +4,7 @@ import modelos.*;
 
 public class Raycaster extends Raytracer{
 
-  public void dispararRaios() {
+  public void render() {
 
     double w = camera.wJanela;
     double h = camera.hJanela;

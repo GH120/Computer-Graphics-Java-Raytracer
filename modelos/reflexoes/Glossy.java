@@ -6,7 +6,7 @@ import modelos.Ponto;
 import modelos.Raio;
 
 //Falta adicionar o construtor...
-public class Glossy extends Reflexao{
+public class Glossy extends Superficie{
 
     double roughness;
 

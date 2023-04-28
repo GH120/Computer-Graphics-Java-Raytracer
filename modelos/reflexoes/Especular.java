@@ -3,7 +3,7 @@ import java.util.List;
 
 import modelos.*;
 
-public class Especular extends Reflexao{
+public class Especular extends Superficie{
 
     public void refletir(Ponto ponto, Raio raio, List<Raio> raios){
 

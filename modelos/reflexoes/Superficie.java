@@ -22,7 +22,7 @@ import java.util.List;
 
 //Logo, Uma Reflexão tem Umaa razão de eficiência para geração de raios
 
-public abstract class Reflexao {
+public abstract class Superficie {
 
     int    pixelCount;
     double eficiencia = 1.0;

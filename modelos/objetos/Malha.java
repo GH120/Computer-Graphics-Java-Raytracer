@@ -10,7 +10,7 @@ public abstract class Malha extends Conjunto{
   ArrayList<int[]>   LA = new ArrayList<>();
   ArrayList<int[]>   LF = new ArrayList<>();
 
-  public Malha renderizar(){
+  public Malha construir(){
     for(int[] face : LF){
       componentes.add(gerarTriangulo(face));
     }
@@ -34,7 +34,7 @@ public abstract class Malha extends Conjunto{
     Objeto tronco = new Cilindro(triangulo.P1.valores)
                           .setRaio(5)
                           .setTopo(triangulo.n.vezes(20).valores)
-                          .renderizar()
+                          .construir()
                           .setKe(0.824, 0.706, 0.549)
                           .setKd(0.824, 0.706, 0.549)
                           .setKa(0.824, 0.706, 0.549);

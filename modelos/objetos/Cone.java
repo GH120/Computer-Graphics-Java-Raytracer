@@ -13,7 +13,7 @@ public class Cone extends Composto{
   }
 
   //Seta as propriedades dos componentes do objeto composto
-  public Cone renderizar(){
+  public Cone construir(){
     inferior = new Circulo(base.valores);
     inferior.setNormal(dir.vezes(-1).valores);
     inferior.setRaio(raio);

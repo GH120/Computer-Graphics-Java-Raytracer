@@ -15,7 +15,7 @@ public class Cilindro extends Cone{
     this.base = new Vetor(eixos);
   }
 
-  public Cilindro renderizar(){
+  public Cilindro construir(){
     
     inferior = new Circulo(base.valores);
     inferior.setNormal(dir.vezes(-1).valores);

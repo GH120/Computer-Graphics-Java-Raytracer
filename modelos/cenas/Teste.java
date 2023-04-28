@@ -13,7 +13,7 @@ public class Teste extends Cena{
     Objetos(
 
                   new Cubo(100)
-                  .renderizar()
+                  .construir()
                   .setKe(1.0, 0.078, 0.576)
                   .setKd(1.0, 0.078, 0.576)
                   .setKa(1., 0.078, 0.576)

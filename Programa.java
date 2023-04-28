@@ -75,7 +75,7 @@ public class Programa {
 
     raytracer.gerarBuffer();
 
-    raytracer.dispararRaios();
+    raytracer.render();
 
     window.revalidate();
 

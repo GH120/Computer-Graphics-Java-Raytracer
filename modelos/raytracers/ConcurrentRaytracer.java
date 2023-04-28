@@ -1,7 +1,7 @@
 package modelos.raytracers;
 import algebra.*;
 import modelos.*;
-import modelos.reflexoes.Reflexao;
+import modelos.reflexoes.Superficie;
 
 import java.util.*;
 import java.util.concurrent.Callable;
@@ -18,7 +18,7 @@ public class ConcurrentRaytracer extends Raytracer{
     this.depth = depth;
   }
 
-  public void dispararRaios() {
+  public void render() {
 
     ExecutorService executorService = Executors.newFixedThreadPool(NUM_THREADS);
 
@@ -74,15 +74,14 @@ public class ConcurrentRaytracer extends Raytracer{
 
   Vetor buscaCor(Raio raio, LinkedList<Raio> linhas) {
 
-    Ponto ponto = cena.objetos.colisao(raio.origem,
-        raio.direcao);
+    Ponto ponto = cena.objetos.colisao(raio.origem, raio.direcao);
 
     if (ponto == null)
-      return new Vetor(0,0,0);
+      return cena.background;
 
     if(raio.profundidade < depth){
 
-      Reflexao superficie = ponto.objeto.reflexao;
+      Superficie superficie = ponto.objeto.superficie;
 
       if(superficie != null) superficie.refletir(ponto, raio, linhas);
 

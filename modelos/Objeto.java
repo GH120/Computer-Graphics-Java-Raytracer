@@ -1,46 +1,15 @@
 package modelos;
 // import java.util.ArrayList;
 import algebra.*;
-import modelos.reflexoes.Reflexao;
+import modelos.reflexoes.Superficie;
 
 public abstract class Objeto extends Movable{ 
 
   Vetor Ke, Ka, Kd;
 
-  public Reflexao reflexao = null;
+  public Superficie superficie = null;
   
   public abstract Ponto colisao(Vetor p0, Vetor dr);
-
-
-  //Funções úteis abaixo
-
-  //RETORNA UM PONTO DESSE OBJETO
-  protected Ponto getPonto(Vetor pi, Vetor normal){
-    return new Ponto(this, pi, normal);
-  }
-
-  //RESOLVE QUADRÁTICA PARA DETERMINAR PONTOS VÁLIDOS DE INTERSEÇÃO COM RAIO
-  protected Vetor intersecaoRaio(double a, double b, double c, Vetor p0, Vetor dr){
-    
-    double delta = b*b - 4*a*c;
-    
-    //Raiz imaginária
-    if (delta < 0) return null;
-
-    delta = (double)Math.sqrt(delta);
-    
-    double t1 = (-b-delta)/(2*a);
-    
-    double t2 = (-b+delta)/(2*a);
-
-    //Pega a menor raiz positiva 
-    double t = (t1 < t2)? (t1 > 0)? t1 : t2 : 
-                          (t2 > 0)? t2 : t1;
-    //Se não existir raiz positiva
-    if(t < 0) return null;
-
-    return p0.mais(dr.vezes(t));
-  }
 
   public Objeto setKe(double ...rgb){
     Ke = new Vetor(rgb);
@@ -87,9 +56,9 @@ public abstract class Objeto extends Movable{
     return false;
   }
 
-  public Objeto addReflection(Reflexao reflexao){
+  public Objeto addReflection(Superficie refletora){
 
-    this.reflexao = reflexao;
+    this.superficie = refletora;
 
     return this;
   }

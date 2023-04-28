@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 import algebra.*;
 import modelos.*;
-import modelos.reflexoes.Reflexao;
+import modelos.reflexoes.Superficie;
 
 public abstract class Composto extends Objeto{
   
@@ -98,10 +98,10 @@ public abstract class Composto extends Objeto{
   }
 
   @Override
-  public Composto addReflection(Reflexao reflexao){
+  public Composto addReflection(Superficie refletora){
 
     for(Objeto componente : componentes){
-      componente.addReflection(reflexao);
+      componente.addReflection(refletora);
     }
 
     return this;

@@ -16,7 +16,7 @@ public abstract class Raytracer{
 
   public Cena cena;
 
-  public abstract void dispararRaios();
+  public abstract void render();
 
   Vetor iluminar(Ponto ponto, Vetor viewer){
 

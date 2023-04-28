@@ -46,13 +46,13 @@ public class Natal extends Cena{
             new Cilindro(0, -150, -200)
             .setTopo(0, -60, -200)
             .setRaio(5)
-            .renderizar()
+            .construir()
             .setKe(0.824, 0.706, 0.549)
             .setKd(0.824, 0.706, 0.549)
             .setKa(0.824, 0.706, 0.549),
 
             new Cubo(40)
-            .renderizar()
+            .construir()
             .setKe(1.0, 0.078, 0.576)
             .setKd(1.0, 0.078, 0.576)
             .setKa(1., 0.078, 0.576)
@@ -64,7 +64,7 @@ public class Natal extends Cena{
             new Cone(0,-50,-200)
             .setTopo(0,90,-200)
             .setRaio(90)
-            .renderizar()
+            .construir()
             .setKe(0.0, 1.0, 0.498)
             .setKd(0.0, 1.0, 0.498)
             .setKa(0.0, 1.0, 0.498),

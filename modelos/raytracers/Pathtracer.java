@@ -14,7 +14,7 @@ public class Pathtracer extends Raytracer {
     this.depth = depth;
   }
 
-  public void dispararRaios() {
+  public void render() {
 
     gerarRaios();
 

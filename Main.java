@@ -24,7 +24,7 @@ class Main {
   public static void main(String[] args) {
     
       rodarPrograma(
-                    new Teste(),                  //Cena escolhida
+                    new NatalOtimizado(),                  //Cena escolhida
                     new ConcurrentRaytracer(3),    //Raytracer escolhido
                     500, 500,               //Resolução
                     CAMERA_PERSPECTIVA                   //Câmera da cena escolhida
@@ -55,14 +55,14 @@ class Main {
     // triangulo.toWorld.printar();
     
     
-    // new Programa().setCena(
-    //                         cena
-    //                         .luzAmbiente(0.1,0.1,0.1)
-    //               )
-    //               .setTracer(tracer)
-    //               .getCamera(index)
-    //               .setResolution(width, height)
-    //               .renderizar();
+    new Programa().setCena(
+                            cena
+                            .luzAmbiente(0.1,0.1,0.1)
+                  )
+                  .setTracer(tracer)
+                  .getCamera(index)
+                  .setResolution(width, height)
+                  .renderizar();
 
     ArrayList<Raio> raios = new ArrayList();
 

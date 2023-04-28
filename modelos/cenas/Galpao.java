@@ -54,7 +54,7 @@ public class Galpao extends Cena {
     return new Conjunto(
               
                   new Cubo(1)
-                  .renderizar()
+                  .construir()
                   .setTextura("images.jpeg")
                   .aplicar(
                     new Translacao(0,95,0),
@@ -62,14 +62,14 @@ public class Galpao extends Cena {
                   ),
     
                   new Cubo(1)
-                  .renderizar()
+                  .construir()
                   .setTextura("images.jpeg")
                   .aplicar(
                     new Escala(5,95,150)
                   ),
     
                   new Cubo(1)
-                  .renderizar()
+                  .construir()
                   .setTextura("images.jpeg")
                   .aplicar(
                     new Translacao(245,0,0),
@@ -88,7 +88,7 @@ public class Galpao extends Cena {
               new Cilindro(0,0,0)
               .setTopo(0,9,0)
               .setRaio(30)
-              .renderizar()
+              .construir()
               .setKe(0.79215, 0.64313, 0.44705)
               .setKd(0.79215, 0.64313, 0.44705)
               .setKa(0.79215, 0.64313, 0.44705),
@@ -96,7 +96,7 @@ public class Galpao extends Cena {
               new Cilindro(0,9,0)
               .setTopo(0,49,0)
               .setRaio(6)
-              .renderizar()
+              .construir()
               .setKe(0.79215, 0.64313, 0.44705)
               .setKd(0.79215, 0.64313, 0.44705)
               .setKa(0.79215, 0.64313, 0.44705),
@@ -104,7 +104,7 @@ public class Galpao extends Cena {
               new Cone(0,49,0)
               .setTopo(0,199,0)
               .setRaio(60)
-              .renderizar()
+              .construir()
               .setKe(0.38039, 0.54117, 0.23921)
               .setKd(0.38039, 0.54117, 0.23921)
               .setKa(0.38039, 0.54117, 0.23921),
@@ -119,7 +119,7 @@ public class Galpao extends Cena {
             new Cilindro(0,0,0)
             .setTopo(0,204,0)
             .setRaio(60)
-            .renderizar()
+            .construir()
           )
           ;
   }
@@ -163,7 +163,7 @@ public class Galpao extends Cena {
           new Cilindro(350,350,0)
           .setTopo(350,350,-1050)
           .setRaio(500)
-          .renderizar()
+          .construir()
         );
 
       
@@ -189,14 +189,14 @@ public class Galpao extends Cena {
     return new Conjunto(
               
                   new Cubo(1)
-                  .renderizar()
+                  .construir()
                   .setTextura("madeira2.jpg")
                   .aplicar(
                     new Escala(50,500,30)
                   ),
     
                   new Cubo(1)
-                  .renderizar()
+                  .construir()
                   .setTextura("madeira2.jpg")
                   .aplicar(
                     new Translacao(50,450,0),
@@ -209,7 +209,7 @@ public class Galpao extends Cena {
   Objeto ParedePosterior(){
     
     return new Cubo(1)
-           .renderizar()
+           .construir()
            .setTextura("aço.jpg")
            .aplicar(
              new Escala(600,500,20)
@@ -220,7 +220,7 @@ public class Galpao extends Cena {
   Objeto ParedeLateral(){
 
     return new Cubo(1)
-           .renderizar()
+           .construir()
            .setTextura("aço.jpg")
            .aplicar(
              new Escala(20,500,1000)
@@ -233,7 +233,7 @@ public class Galpao extends Cena {
     return new Conjunto(
                 
                 new Cubo(1)
-                .renderizar()
+                .construir()
                 .setTextura("telhado.jpg")
                 .aplicar(
                   new Escala(300,50,1000),
@@ -241,7 +241,7 @@ public class Galpao extends Cena {
                 ),
 
                 new Cubo(1)
-                .renderizar()
+                .construir()
                 .setTextura("telhado.jpg")
                 .aplicar(
                   new Escala(300,50,1000),
