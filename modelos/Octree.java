@@ -1,3 +1,4 @@
+package modelos;
 //Subdivide o espaço em oito cubos
 //Tamanho do cubo maior => começar com uma constante 1000
 //Obs: acionar limitação para computação de planos, não contar eles como objetos na subdivisão da octree
@@ -6,7 +7,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 import algebra.*;
-import modelos.*;
 import modelos.objetos.*;
 
 class Node{

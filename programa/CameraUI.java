@@ -1,8 +1,13 @@
+package programa;
 
 import java.awt.*;
 import javax.swing.*;
 
 import modelos.*;
+import modelos.cameras.Ortografica;
+import modelos.cameras.Perspectiva;
+import modelos.cameras.Projecao;
+import programa.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

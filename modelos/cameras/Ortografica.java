@@ -1,4 +1,4 @@
-package modelos;
+package modelos.cameras;
 import algebra.*;
 
 //Consertar...

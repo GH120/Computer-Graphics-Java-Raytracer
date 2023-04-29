@@ -1,3 +1,4 @@
+package programa;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -14,6 +15,7 @@ import javax.swing.SwingConstants;
 
 import modelos.*;
 import modelos.fontes.*;
+import programa.*;
 
 public class FonteUI extends JPanel implements Observer{
 

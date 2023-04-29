@@ -1,5 +1,6 @@
-package modelos;
+package modelos.cameras;
 import algebra.*;
+import modelos.*;
 
 //Camera to world -> processar colisão -> world to camera?
 

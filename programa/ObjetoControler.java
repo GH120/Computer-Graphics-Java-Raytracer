@@ -1,3 +1,4 @@
+package programa;
 import java.util.ArrayList;
 
 import algebra.*;
@@ -10,13 +11,13 @@ public class ObjetoControler extends Controler{
 
   ArrayList<Objeto> arvore;
 
-  Controler setPrograma(Programa programa){
+  public Controler setPrograma(Programa programa){
     super.setPrograma(programa);
     selecionado = null;
     return this;
   }
 
-  void setupPropriedades(){
+  public void setupPropriedades(){
     
     super.setupPropriedades();
 
@@ -31,7 +32,7 @@ public class ObjetoControler extends Controler{
     System.out.println(propriedades);
   }
 
-  void setupCor(){
+  public void setupCor(){
 
     if(selecionado == null) return;
     if(selecionado.getKd(null) == null) return;
@@ -55,7 +56,7 @@ public class ObjetoControler extends Controler{
     propriedades.put("Ke3", "" + Ke.get(2));
   }
 
-  void setupCoordenadas(){
+  public void setupCoordenadas(){
 
     if(selecionado == null) return;
     
@@ -88,7 +89,7 @@ public class ObjetoControler extends Controler{
     propriedades.put("L44", "" + L4.get(3));
   }
 
-  void compilar(){
+  public void compilar(){
 
     Vetor Kd = getVetor("Kd");
     Vetor Ke = getVetor("Ke");
@@ -112,7 +113,7 @@ public class ObjetoControler extends Controler{
     
   }
 
-  void mudarTextura(){
+  public void mudarTextura(){
 
     if(!(propriedades.containsKey("Textura"))) return;
 
@@ -131,7 +132,7 @@ public class ObjetoControler extends Controler{
     selecionado = objeto.getComponentes().get(index);
   }
 
-  void mudarCoeficientes(Vetor Kd, Vetor Ke, Vetor Ka) throws Exception{
+  public void mudarCoeficientes(Vetor Kd, Vetor Ke, Vetor Ka) throws Exception{
 
     if(Kd == null || Ke == null || Ka == null) return;
 
@@ -140,13 +141,13 @@ public class ObjetoControler extends Controler{
     selecionado.setKe(Ke.valores);
   }
 
-  void selecionar(Objeto objeto){
+  public void selecionar(Objeto objeto){
     selecionado = objeto;
     setupPropriedades();
     arvore = new ArrayList<>();
   }
 
-  String getName(){
+  public String getName(){
 
     if(selecionado == null) return "Nenhum";
     

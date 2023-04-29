@@ -3,7 +3,8 @@ import java.util.*;
 
 import java.awt.*;
 import algebra.*;
-import modelos.fontes.Fonte;
+import modelos.cameras.*;
+import modelos.fontes.*;
 import modelos.objetos.*;
 
 //Guarda as cameras, fontes e objetos

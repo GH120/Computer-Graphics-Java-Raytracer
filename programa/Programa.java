@@ -1,10 +1,20 @@
+package programa;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import algebra.*;
 import modelos.*;
+import modelos.cameras.*;
 import modelos.raytracers.*;
 
 public class Programa {
@@ -106,6 +116,12 @@ public class Programa {
     return this;
   }
 
+  public Programa setSize(int width, int height){
+    this.window.setSize(new Dimension(width, height));
+    this.canvas.setPreferredSize(new Dimension(width, height*4/5));
+    return this;
+  }
+
   public Programa setupControlers() {
     for (Controler controler : controlers) {
       controler.setPrograma(this);
@@ -139,4 +155,63 @@ public class Programa {
 
   }
 
+}
+
+class Contar{
+
+  Timer timer;
+  long startTime, endTime;
+  Path file = Paths.get("teste.txt");
+  ArrayList<String> linhas = new ArrayList<>();
+  double total = 0;
+
+  void start(){
+    timer = new Timer();
+    
+    timer.schedule(new ContarSegundos(), 1000, 1000);
+
+    startTime = System.currentTimeMillis();
+
+    System.out.println("Começando execução...");
+  }
+
+  void end(){
+    endTime = System.currentTimeMillis();
+
+    timer.cancel();
+    
+    System.out.println("Levou o total de " + (endTime - startTime) + " milisegundos");
+
+    add(endTime-startTime);
+  }
+
+  void gravar(){
+
+    double media = total/linhas.size();
+
+    linhas.add("\n Tempo médio: " + media);
+    
+    try{
+      Files.write(file, linhas, StandardCharsets.UTF_8);
+    }
+    catch(Exception e){
+    }
+  }
+
+  class ContarSegundos extends TimerTask {
+    
+    int segundos;
+  
+    public void run() {
+        System.out.println((segundos+1) + "s se pass"+((segundos > 0)? "aram" : "ou"));
+        segundos++;
+    }
+  }
+  
+  void add(double segundos){
+    linhas.add("Execução: "+ linhas.size() + " - " +segundos+ "ms");
+
+    total += segundos;
+  }
+  
 }

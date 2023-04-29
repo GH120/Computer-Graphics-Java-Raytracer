@@ -1,3 +1,4 @@
+package programa;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
@@ -12,7 +13,7 @@ import modelos.raytracers.*;
 
 public class Tela extends JPanel {
 
-  Raytracer raytracer = null;
+  public Raytracer raytracer = null;
 
   public void paintComponent(Graphics g) {
     super.paintComponent(g);

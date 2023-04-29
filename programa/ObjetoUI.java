@@ -1,3 +1,4 @@
+package programa;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -13,6 +14,7 @@ import javax.swing.SwingConstants;
 
 import modelos.*;
 import modelos.objetos.Textura;
+import programa.*;
 
 public class ObjetoUI extends JPanel{
 

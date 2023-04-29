@@ -1,8 +1,10 @@
+package programa;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.HashMap;
+import org.w3c.dom.*;
 
 import algebra.*;
 import modelos.*;
@@ -12,7 +14,7 @@ public abstract class Controler extends Observable implements ActionListener, Ke
   HashMap<String,String> propriedades;
   Programa programa;
 
-  Controler setPrograma(Programa programa){    
+  public Controler setPrograma(Programa programa){    
     this.programa = programa;
     setupPropriedades();
     return this;
@@ -54,7 +56,7 @@ public abstract class Controler extends Observable implements ActionListener, Ke
     
   }
 
-  Vetor getVetor(String id){
+  public Vetor getVetor(String id){
 
     Double v1 = getValor(id+"1");
     Double v2 = getValor(id+"2");
@@ -67,7 +69,7 @@ public abstract class Controler extends Observable implements ActionListener, Ke
     return new Vetor(v1,v2,v3);
   }
 
-  Vetor getVetor(String id, int tamanho){
+  public Vetor getVetor(String id, int tamanho){
 
     double[] v = new double[tamanho];
 
@@ -81,7 +83,7 @@ public abstract class Controler extends Observable implements ActionListener, Ke
     return new Vetor(v);
   }
 
-  Double getValor(String id){
+  public Double getValor(String id){
     
     if(!propriedades.containsKey(id)) return null;
 

@@ -1,4 +1,4 @@
-package modelos;
+package modelos.cameras;
 import algebra.*;
 
 //Feito na base do improviso, refatorar depois...

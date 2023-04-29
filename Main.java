@@ -1,19 +1,7 @@
-// Feito por Felipe Vieira Duarte - 509067 e Yasser dos Santos Djalo - 514095
-
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import modelos.*;
 import modelos.cenas.*;
-import modelos.objetos.*;
 import modelos.raytracers.*;
-import modelos.reflexoes.*;
-import algebra.*;
+import programa.Programa;
 
 class Main {
 
@@ -23,15 +11,32 @@ class Main {
   public static void main(String[] args) {
     
       rodarPrograma(
-                    new NatalOtimizado(),                  //Cena escolhida
+                    new NatalOtimizado(),                //Cena escolhida
                     new ConcurrentRaytracer(3),    //Raytracer escolhido
-                    500, 500,               //Resolução
+                    700, 700,               //Resolução
                     CAMERA_PERSPECTIVA                   //Câmera da cena escolhida
       );
     
   }
 
   static void rodarPrograma(Cena cena, Raytracer tracer ,int width, int height, int index){
+        
+    new Programa().setCena(
+                            cena
+                            .luzAmbiente(0.1,0.1,0.1)
+                  )
+                  .setTracer(tracer)
+                  .getCamera(index)
+                  .setResolution(width, height)
+                  .setSize(width, height)
+                  .renderizar();
+  }
+}
+
+
+class Teste{
+
+  static void testeOctree(){
 
     // Node node =new Octree(new Vetor(0,0,0), 500)
     // .processar(cena.objetos.componentes)
@@ -52,16 +57,9 @@ class Main {
     // Objeto triangulo = cubo.componentes.get(0);
 
     // triangulo.toWorld.printar();
-    
-    
-    new Programa().setCena(
-                            cena
-                            .luzAmbiente(0.1,0.1,0.1)
-                  )
-                  .setTracer(tracer)
-                  .getCamera(index)
-                  .setResolution(width, height)
-                  .renderizar();
+  }
+
+  static void testeGlossy(){
 
     // ArrayList<Raio> raios = new ArrayList<>();
 
@@ -88,66 +86,4 @@ class Main {
 
     // for(Raio raio: raios) raio.printar();
   }
-}
-
-
-
-
-class Contar{
-
-  Timer timer;
-  long startTime, endTime;
-  Path file = Paths.get("teste.txt");
-  ArrayList<String> linhas = new ArrayList<>();
-  double total = 0;
-
-  void start(){
-    timer = new Timer();
-    
-    timer.schedule(new ContarSegundos(), 1000, 1000);
-
-    startTime = System.currentTimeMillis();
-
-    System.out.println("Começando execução...");
-  }
-
-  void end(){
-    endTime = System.currentTimeMillis();
-
-    timer.cancel();
-    
-    System.out.println("Levou o total de " + (endTime - startTime) + " milisegundos");
-
-    add(endTime-startTime);
-  }
-
-  void gravar(){
-
-    double media = total/linhas.size();
-
-    linhas.add("\n Tempo médio: " + media);
-    
-    try{
-      Files.write(file, linhas, StandardCharsets.UTF_8);
-    }
-    catch(Exception e){
-    }
-  }
-
-  class ContarSegundos extends TimerTask {
-    
-    int segundos;
-  
-    public void run() {
-        System.out.println((segundos+1) + "s se pass"+((segundos > 0)? "aram" : "ou"));
-        segundos++;
-    }
-  }
-  
-  void add(double segundos){
-    linhas.add("Execução: "+ linhas.size() + " - " +segundos+ "ms");
-
-    total += segundos;
-  }
-  
 }

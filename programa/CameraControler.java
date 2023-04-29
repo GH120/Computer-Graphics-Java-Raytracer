@@ -1,13 +1,14 @@
+package programa;
 import java.awt.event.ActionEvent;
 
 import algebra.*;
-import modelos.*;
+import modelos.cameras.*;
 
 public class CameraControler extends Controler{
 
   Camera camera;
 
-  Controler setPrograma(Programa programa){
+  public Controler setPrograma(Programa programa){
     super.setPrograma(programa);
     camera = programa.camera;
     setupPropriedades();

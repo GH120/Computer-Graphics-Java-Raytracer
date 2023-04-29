@@ -1,17 +1,18 @@
+package programa;
 import java.awt.event.ActionEvent;
 import java.util.HashMap;
 
 import algebra.*;
 import modelos.fontes.*;
 
-class FonteControler extends Controler{
+public class FonteControler extends Controler{
 
   Fonte fonte;
   //Guarda a cor quando apaga a luz, que é apenas colocar intensidade 0
   HashMap<Integer, Vetor> cores;
 
 
-  Controler setPrograma(Programa programa){
+  public Controler setPrograma(Programa programa){
     super.setPrograma(programa);
     fonte = programa.cena.fontes.get(0);
     cores = new HashMap<>();
@@ -46,7 +47,7 @@ class FonteControler extends Controler{
     propriedades.put("Direção3", "" + direcao.valores[2]);
   }
 
-  void compilar(){
+  public void compilar(){
     
     if(On()) setCor(getVetor("Cor"));
     mover(getVetor("Posição"));
@@ -54,7 +55,7 @@ class FonteControler extends Controler{
     setAbertura(getValor("Ângulo"));
   }
 
-  void mover(Vetor posicao){
+  public void mover(Vetor posicao){
 
     if(posicao == null){
       System.out.println("Posição da luz mal inserida");
@@ -64,7 +65,7 @@ class FonteControler extends Controler{
     fonte.posicao = posicao;
   }
 
-  void setDirecao(Vetor direcao){
+  public void setDirecao(Vetor direcao){
 
     if(direcao == null) return;
 
@@ -75,7 +76,7 @@ class FonteControler extends Controler{
     direcional.setDirecao(direcao.valores);
   }
 
-  void setAbertura(Double angulo){
+  public void setAbertura(Double angulo){
 
     if (angulo == null) return;
 
@@ -86,7 +87,7 @@ class FonteControler extends Controler{
     spot.setAngulo(angulo);
   }
 
-  void setCor(Vetor cor){
+  public void setCor(Vetor cor){
 
     if(cor == null){
       System.out.println("Cor da luz mal inserida");
@@ -96,7 +97,7 @@ class FonteControler extends Controler{
     fonte.If = cor;
   }
   
-  void apagar(){
+  public void apagar(){
     
     if(On()){
       cores.put(getIndice(), new Vetor(fonte.If.valores));
@@ -112,13 +113,13 @@ class FonteControler extends Controler{
 
   }
 
-  boolean On(){
+  public boolean On(){
     if(!cores.containsKey(getIndice())) return true;
     if(cores.get(getIndice()) == null) return true;
     return false;
   }
 
-  String getName(){
+  public String getName(){
 
     int i = 0;
     for(Fonte luz : programa.cena.fontes){
@@ -142,7 +143,7 @@ class FonteControler extends Controler{
     notificar();
   }
 
-  int getIndice(){
+  public int getIndice(){
 
     int i = 0;
     for(Fonte luz : programa.cena.fontes){
@@ -155,7 +156,7 @@ class FonteControler extends Controler{
     return -1;
   }
 
-  void mudarFonte(){
+  public void mudarFonte(){
     
     int quantidade = programa.cena.fontes.size();
 

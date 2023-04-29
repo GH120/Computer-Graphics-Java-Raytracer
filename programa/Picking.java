@@ -1,9 +1,11 @@
+package programa;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import algebra.*;
 import modelos.*;
+import modelos.cameras.Camera;
 import modelos.raytracers.*;
 
 
@@ -35,7 +37,7 @@ public class Picking implements MouseListener{
 
     //Corrigir para acertar mesmo com parte da tela em branco
   
-    void handleClick(int xJanela, int yJanela){
+    public void handleClick(int xJanela, int yJanela){
 
       Ponto ponto = getColisao(xJanela, yJanela);
 
@@ -55,7 +57,7 @@ public class Picking implements MouseListener{
 
     }
 
-    Ponto getColisao(int xJanela, int yJanela){
+    private Ponto getColisao(int xJanela, int yJanela){
       
       Camera    camera = programa.camera;
       Raytracer tracer = programa.raytracer;

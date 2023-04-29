@@ -1,9 +1,11 @@
+package programa;
 
 
 import java.awt.*;
 import javax.swing.*;
 
 import modelos.*;
+import programa.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
