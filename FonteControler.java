@@ -2,9 +2,7 @@ import java.awt.event.ActionEvent;
 import java.util.HashMap;
 
 import algebra.*;
-import modelos.fontes.Direcional;
-import modelos.fontes.Fonte;
-import modelos.fontes.Spot;
+import modelos.fontes.*;
 
 class FonteControler extends Controler{
 

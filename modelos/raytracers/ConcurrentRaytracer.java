@@ -1,7 +1,8 @@
 package modelos.raytracers;
+
 import algebra.*;
 import modelos.*;
-import modelos.reflexoes.Superficie;
+import modelos.reflexoes.*;
 
 import java.util.*;
 import java.util.concurrent.Callable;

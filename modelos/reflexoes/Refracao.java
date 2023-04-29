@@ -2,9 +2,8 @@ package modelos.reflexoes;
 
 import java.util.List;
 
-import algebra.Vetor;
-import modelos.Ponto;
-import modelos.Raio;
+import algebra.*;
+import modelos.*;
 
 public class Refracao extends Especular{
 

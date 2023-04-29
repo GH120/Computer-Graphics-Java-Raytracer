@@ -12,8 +12,7 @@ import modelos.*;
 import modelos.cenas.*;
 import modelos.objetos.*;
 import modelos.raytracers.*;
-import modelos.reflexoes.Glossy;
-import modelos.Ponto;
+import modelos.reflexoes.*;
 import algebra.*;
 
 class Main {
@@ -64,30 +63,30 @@ class Main {
                   .setResolution(width, height)
                   .renderizar();
 
-    ArrayList<Raio> raios = new ArrayList();
+    // ArrayList<Raio> raios = new ArrayList<>();
 
-    Objeto plano = new Plano(0,150,0)
-    .setNormal(0,-1,0)
-    .setKd(0.4, 0.4, 0.4)
-    .setKa(0.4, 0.4, 0.4)
-    .setKe(0.4, 0.4, 0.4);
+    // Objeto plano = new Plano(0,150,0)
+    // .setNormal(0,-1,0)
+    // .setKd(0.4, 0.4, 0.4)
+    // .setKa(0.4, 0.4, 0.4)
+    // .setKe(0.4, 0.4, 0.4);
 
-    // Creating a ray with origin at (0,0,0) and direction (1,1,1)
-    Raio ray = new Raio();
-    ray.origem = new Vetor(0, 0, 0);
-    ray.direcao = new Vetor(1, 1, 1).unitario();
-    ray.intensidade = new Vetor(1,1,1);
-    ray.linha = 1;
-    ray.coluna = 1;
+    // // Creating a ray with origin at (0,0,0) and direction (1,1,1)
+    // Raio ray = new Raio();
+    // ray.origem = new Vetor(0, 0, 0);
+    // ray.direcao = new Vetor(1, 1, 1).unitario();
+    // ray.intensidade = new Vetor(1,1,1);
+    // ray.linha = 1;
+    // ray.coluna = 1;
 
-    // Creating a point with position (2,2,2) and normal vector (0,1,0)
-    Ponto point = new Ponto(plano, new Vetor(2, 2, 2), new Vetor(0, 1, 0));
-    point.pos = new Vetor(2, 2, 2);
-    point.normal = new Vetor(0, 1, 0).unitario();
+    // // Creating a point with position (2,2,2) and normal vector (0,1,0)
+    // Ponto point = new Ponto(plano, new Vetor(2, 2, 2), new Vetor(0, 1, 0));
+    // point.pos = new Vetor(2, 2, 2);
+    // point.normal = new Vetor(0, 1, 0).unitario();
 
-    new Glossy(0.99,3,1).refletir(point, ray, raios);
+    // new Glossy(0.99,3,1).refletir(point, ray, raios);
 
-    for(Raio raio: raios) raio.printar();
+    // for(Raio raio: raios) raio.printar();
   }
 }
 

@@ -5,7 +5,7 @@ import java.awt.event.KeyListener;
 import java.util.HashMap;
 
 import algebra.*;
-import modelos.Observable;
+import modelos.*;
 
 public abstract class Controler extends Observable implements ActionListener, KeyListener{
 

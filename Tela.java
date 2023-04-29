@@ -8,7 +8,7 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
-import modelos.raytracers.Raytracer;
+import modelos.raytracers.*;
 
 public class Tela extends JPanel {
 

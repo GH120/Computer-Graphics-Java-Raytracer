@@ -12,9 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import modelos.Observer;
-import modelos.fontes.Direcional;
-import modelos.fontes.Spot;
+import modelos.*;
+import modelos.fontes.*;
 
 public class FonteUI extends JPanel implements Observer{
 

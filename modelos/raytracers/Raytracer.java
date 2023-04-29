@@ -2,7 +2,7 @@ package modelos.raytracers;
 
 import algebra.*;
 import modelos.*;
-import modelos.fontes.Fonte;
+import modelos.fontes.*;
 
 public abstract class Raytracer{
 

@@ -1,10 +1,7 @@
 import java.awt.event.ActionEvent;
 
 import algebra.*;
-import modelos.Camera;
-import modelos.Ortografica;
-import modelos.Perspectiva;
-import modelos.Projecao;
+import modelos.*;
 
 public class CameraControler extends Controler{
 

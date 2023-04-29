@@ -11,7 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import modelos.Objeto;
+import modelos.*;
 import modelos.objetos.Textura;
 
 public class ObjetoUI extends JPanel{

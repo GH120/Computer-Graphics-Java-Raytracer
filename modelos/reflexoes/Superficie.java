@@ -1,7 +1,6 @@
 package modelos.reflexoes;
 
-import modelos.Ponto;
-import modelos.Raio;
+import modelos.*;
 
 import java.util.List;
 

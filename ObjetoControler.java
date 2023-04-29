@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 import algebra.*;
-import modelos.Objeto;
+import modelos.*;
 import modelos.objetos.*;
 
 public class ObjetoControler extends Controler{
