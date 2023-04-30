@@ -135,7 +135,7 @@ class Node{
       Vetor relativo = objeto.toViewer(new Posicao(centro)).tresD();
       double raio = objeto.inversa.getLinha(0).get(0)*tamanho;
       
-      if(objeto.accpet(new DentroDeCubo()))
+      if(objeto.inside(relativo, raio))
         this.objetos.add(objeto);
     }
 

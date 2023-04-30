@@ -59,7 +59,7 @@ public class Glossy extends Superficie{
         //A reflexão perturbada vai ser um vetor ortogonal a ela nesse plano
         Vetor reflexaoPerturbada = eixoX.vezes(Math.random())
                                         .mais(eixoY.vezes(Math.random()))
-                                        .vezes(0.1);
+                                        .vezes(roughness);
 
         Vetor reflexaoFinal = reflexaoIdeal.mais(reflexaoPerturbada).unitario();
     

@@ -9,6 +9,11 @@ public class Refracao extends Especular{
 
     double indiceRefracao;
 
+    public Refracao(double indiceRefracao, double eficiencia){
+        this.eficiencia = eficiencia;
+        this.indiceRefracao = indiceRefracao;
+    }
+
     public void refletir(Ponto ponto, Raio raio, List<Raio> raios){  
         raios.add(refracao(ponto, raio));
     }
