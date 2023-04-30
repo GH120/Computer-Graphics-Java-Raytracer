@@ -21,13 +21,13 @@ public class ObjetoControler extends Controler{
     
     super.setupPropriedades();
 
-    setupCor();
     setupCoordenadas();
 
     if(selecionado instanceof Textura){
       Textura textura = (Textura) selecionado;
       propriedades.put("Textura", textura.path);
     }
+    else setupCor();
 
     System.out.println(propriedades);
   }

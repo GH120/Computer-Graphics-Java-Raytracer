@@ -21,7 +21,7 @@ public class Glossy extends Superficie{
 
             Raio refletido = reflexao(ponto, raio);
 
-            // if(refletido.intensidade.escalar(refletido.intensidade) < 0.01) continue;
+            if(refletido.intensidade.escalar(refletido.intensidade) < 0.001) continue;
 
             refletido.intensidade = refletido.intensidade.vezes(eficiencia);
 
@@ -51,10 +51,12 @@ public class Glossy extends Superficie{
                                         )
                                         .unitario();
 
+        //Cria um plano perpendicular a reflexão ideal
         Vetor eixoX = reflexaoIdeal.ortogonal();
 
         Vetor eixoY = eixoX.vetorial(reflexaoIdeal);
 
+        //A reflexão perturbada vai ser um vetor ortogonal a ela nesse plano
         Vetor reflexaoPerturbada = eixoX.vezes(Math.random())
                                         .mais(eixoY.vezes(Math.random()))
                                         .vezes(0.1);
