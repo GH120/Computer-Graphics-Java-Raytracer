@@ -11,26 +11,24 @@ public class Glossy extends Superficie{
 
     public Glossy(double roughness, int pixelCount, double eficiencia){
         this.roughness  = roughness;
-        this.eficiencia = eficiencia;
+        this.eficiencia = eficiencia/pixelCount;
         this.pixelCount = pixelCount;
     }
 
     public void refletir(Ponto ponto, Raio raio, List<Raio> raios){
 
-        eficiencia = eficiencia/pixelCount;
-
         for(int i=0; i < pixelCount;i++){
 
             Raio refletido = reflexao(ponto, raio);
 
-            if(refletido.intensidade.escalar(refletido.intensidade) < 0.01) continue;
+            // if(refletido.intensidade.escalar(refletido.intensidade) < 0.01) continue;
 
             refletido.intensidade = refletido.intensidade.vezes(eficiencia);
 
-            if(refletido.intensidade.modulo() > 0) {
-                refletido.intensidade.printar();
-                System.out.println(refletido.profundidade);
-            }
+            // if(refletido.intensidade.modulo() > 0) {
+            //     refletido.intensidade.printar();
+            //     System.out.println(refletido.profundidade);
+            // }
             raios.add(refletido);
         }
     }
@@ -47,20 +45,21 @@ public class Glossy extends Superficie{
     
         // Direction of ideal reflection
         Vetor reflexaoIdeal = raio.direcao.menos(
-            ponto.normal.vezes(2 * raio.direcao.escalar(ponto.normal))
-        ).unitario();
-    
-        double theta = Math.acos(Math.pow(Math.random(), 1.0 / (roughness + 1)));
+                                            ponto.normal.vezes(2*raio.direcao
+                                            .escalar(ponto.normal)
+                                            )
+                                        )
+                                        .unitario();
 
-        double phi = 2 * Math.PI * Math.random();
+        Vetor eixoX = reflexaoIdeal.ortogonal();
 
-        Vetor reflexaoPerturbada = new Vetor(
-            Math.sin(theta) * Math.cos(phi),
-            Math.sin(theta) * Math.sin(phi),
-            Math.cos(theta)
-        );
+        Vetor eixoY = eixoX.vetorial(reflexaoIdeal);
 
-        Vetor reflexaoFinal = reflexaoPerturbada.mais(reflexaoIdeal).unitario();
+        Vetor reflexaoPerturbada = eixoX.vezes(Math.random())
+                                        .mais(eixoY.vezes(Math.random()))
+                                        .vezes(0.1);
+
+        Vetor reflexaoFinal = reflexaoIdeal.mais(reflexaoPerturbada).unitario();
     
         // Reflected ray has origin at collision point
         refletido.origem = ponto.pos.mais(reflexaoFinal);

@@ -2,6 +2,7 @@ import modelos.*;
 import modelos.cenas.*;
 import modelos.raytracers.*;
 import programa.Programa;
+import algebra.*;
 
 class Main {
 
@@ -12,7 +13,7 @@ class Main {
     
       rodarPrograma(
                     new NatalOtimizado(),                //Cena escolhida
-                    new ConcurrentRaytracer(3),    //Raytracer escolhido
+                    new ConcurrentRaytracer(10),    //Raytracer escolhido
                     700, 700,               //Resolução
                     CAMERA_PERSPECTIVA                   //Câmera da cena escolhida
       );

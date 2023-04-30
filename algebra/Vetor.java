@@ -58,20 +58,20 @@ public class Vetor{
     return (double)Math.sqrt(resultado);
   }
 
-  //Fast square root
+  //Fast square root -> muito imprecisa infelizmente
   public Vetor unitario(){
 
-    double x = valores[0];
-    double y = valores[1];
-    double z = valores[2];
+    // double x = valores[0];
+    // double y = valores[1];
+    // double z = valores[2];
 
-    double lenApprox = Double.longBitsToDouble(0x5fe6ec85e7de30daL - (Double.doubleToLongBits(x*x + y*y + z*z) >> 1));
+    // double lenApprox = Double.longBitsToDouble(0x5fe6ec85e7de30daL - (Double.doubleToLongBits(x*x + y*y + z*z) >> 1));
 
-    x *= lenApprox;
-    y *= lenApprox;
-    z *= lenApprox;
+    // x *= lenApprox;
+    // y *= lenApprox;
+    // z *= lenApprox;
 
-    return new Vetor(x,y,z);
+    return vezes(1/modulo());
   }
 
   //transforma vetor para 4 dimensões
@@ -117,9 +117,9 @@ public class Vetor{
     if (a.escalar(this) == 1) {
         a = new Vetor(0, 1, 0);
     }
-    Vetor n = vetorial(a);
+    Vetor n = vetorial(a).unitario();
     Vetor b = n.vetorial(this);
-    return b.unitario();
+    return b;
   }
 
 

@@ -34,7 +34,7 @@ public class NatalOtimizado extends Cena{
             .setKd(0.933, 0.933, 0.933)
             .setKa(0.933, 0.933, 0.933)
             .setKe(0.933, 0.933, 0.933)
-            .addReflection(new Especular()),
+            .addReflection(new Glossy(0.1,4,1)),
 
             new Piso(
                     (Plano) new Plano(0,-150,0)
