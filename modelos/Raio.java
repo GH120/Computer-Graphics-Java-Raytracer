@@ -69,5 +69,6 @@ public class Raio{
     System.out.println("Direção:");
     direcao.printar();
     System.out.println("Linha: " + linha + "Coluna: " + coluna);
+    System.out.println("è interno "+ interno);
   }
 }

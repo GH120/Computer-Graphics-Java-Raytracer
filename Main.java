@@ -3,6 +3,11 @@ import modelos.cenas.*;
 import modelos.raytracers.*;
 import programa.Programa;
 import algebra.*;
+import modelos.reflexoes.*;
+import java.util.*;
+import modelos.objetos.*;
+
+import java.util.ArrayList;
 
 class Main {
 
@@ -10,19 +15,24 @@ class Main {
   static int CAMERA_ORTOGRAFICA = 2;
   
   public static void main(String[] args) {
-    
+
       rodarPrograma(
-                    new NatalOtimizado(),                //Cena escolhida
-                    new ConcurrentRaytracer(5),    //Raytracer escolhido
-                    700, 700,               //Resolução
-                    CAMERA_PERSPECTIVA                   //Câmera da cena escolhida
+              new modelos.cenas.Teste(),                //Cena escolhida
+              new Sampletracer(2, 10),//Raytracer escolhido
+              700, 700,               //Resolução
+              CAMERA_PERSPECTIVA                   //Câmera da cena escolhida
       );
-    
+
+      new Teste();
+
   }
 
   static void rodarPrograma(Cena cena, Raytracer tracer ,int width, int height, int index){
-        
-    new Programa().setCena(
+
+      //Copiar para main depoiS
+
+
+      new Programa().setCena(
                             cena
                             .luzAmbiente(0.1,0.1,0.1)
                   )
@@ -37,54 +47,48 @@ class Main {
 
 class Teste{
 
-  static void testeOctree(){
+  Cena cena =  new modelos.cenas.Teste();
+  Ponto P1 = new Ponto(null, new Vetor(0,50*Math.sqrt(2), -200 + 50*Math.sqrt(2)), null);
+  Ponto P2 = new Ponto(null, new Vetor(0,0, -300), null);
 
-    // Node node =new Octree(new Vetor(0,0,0), 500)
-    // .processar(cena.objetos.componentes)
-    // .filtrar();
+  Teste(){
 
-    // // node.print();
+      List<Raio> raios = new ArrayList<Raio>(); //Pilha de raios, pra conseguir usar na reflexão da superficie
 
-    // Raio raio = new Raio();
-    // raio.origem = new Vetor(0,0,0);
-    // raio.direcao = new Vetor(0,-120,-150).unitario();
+      Raio raio    = new Raio();
+      raio.origem  = new Vetor(0,50*Math.sqrt(2),0);
+      raio.direcao = new Vetor(0,0,-1);
+      raio.intensidade = new Vetor(1,1,1);
 
-    // node.colisao(raio);
+      raio.origem.printar();
+      raio.direcao.printar();
 
-    // Conjunto conjunto = (Conjunto)cena.objetos.componentes.get(5);
+      Ponto colidido = cena.objetos.colisao(raio.origem, raio.direcao);
 
-    // Composto cubo = (Composto) conjunto.componentes.get(1);
+      colidido.printar(); // Teste do P1, tem que ser igual
 
-    // Objeto triangulo = cubo.componentes.get(0);
+      Superficie refratora = colidido.objeto.superficie; //Pego a superficie do objeto
 
-    // triangulo.toWorld.printar();
-  }
+      refratora.refletir(colidido, raio, raios); //Raio refratado adicionado a pilha de raios
 
-  static void testeGlossy(){
+      System.out.println(Arrays.toString(raios.toArray()));
 
-    // ArrayList<Raio> raios = new ArrayList<>();
+      Raio refratado = raios.get(0); //Pega o raio adicionado na pilha pela ultima reflexão
 
-    // Objeto plano = new Plano(0,150,0)
-    // .setNormal(0,-1,0)
-    // .setKd(0.4, 0.4, 0.4)
-    // .setKa(0.4, 0.4, 0.4)
-    // .setKe(0.4, 0.4, 0.4);
+      System.out.println("raio refratado");
+      refratado.printar();
 
-    // // Creating a ray with origin at (0,0,0) and direction (1,1,1)
-    // Raio ray = new Raio();
-    // ray.origem = new Vetor(0, 0, 0);
-    // ray.direcao = new Vetor(1, 1, 1).unitario();
-    // ray.intensidade = new Vetor(1,1,1);
-    // ray.linha = 1;
-    // ray.coluna = 1;
+      Ponto colididoDentro = cena.objetos.colisao(refratado.origem, refratado.direcao); //Ponto obtido da colisão
 
-    // // Creating a point with position (2,2,2) and normal vector (0,1,0)
-    // Ponto point = new Ponto(plano, new Vetor(2, 2, 2), new Vetor(0, 1, 0));
-    // point.pos = new Vetor(2, 2, 2);
-    // point.normal = new Vetor(0, 1, 0).unitario();
+      colididoDentro.printar();
 
-    // new Glossy(0.99,3,1).refletir(point, ray, raios);
+      refratora.refletir(colididoDentro, refratado, raios); //Raio refratado adicionado a pilha de raios
+      System.out.println("colisão 2");
+      Raio refratado2 = raios.get(1); //Pega o raio adicionado na pilha pela ultima reflexão
 
-    // for(Raio raio: raios) raio.printar();
+      refratado2.printar();
+
+      cena.objetos.colisao(refratado.origem, refratado.direcao).printar();
+
   }
 }
