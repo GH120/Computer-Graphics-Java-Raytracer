@@ -18,11 +18,11 @@ public class Teste extends Cena{
             .setKe(0.5,0.5,0)
             .setKd(0.5,0.5,0)
             .setKa(0.5,0.5,0)
-                    .addReflection(new Refracao(2, 0.5))
+                    .addReflection(new Refracao(1, 0.5))
             ,
 
             new Piso(
-            (Plano) new Plano(0,0,-500)
+            (Plano) new Plano(0,0,-1000)
                     .setNormal(0,0,1)
                     .setKd(1,1,1)
                     .setKa(1,1,1)
