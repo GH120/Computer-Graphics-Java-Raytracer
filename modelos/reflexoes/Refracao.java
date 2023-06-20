@@ -21,37 +21,29 @@ public class Refracao extends Especular{
 
     public Raio refracao(Ponto ponto, Raio raio) {
     
-        Vetor normal = ponto.normal;
-        double cosI = -raio.direcao.escalar(normal);
-    
         double n1, n2;
 
         //System.out.println(raio.interno);
 
         if (raio.interno) {
             // Ray is exiting the object, so swap refractive indices
-            //n1 = indiceRefracao;
-            //n2 = 1.0;
-            //ponto = new Ponto(ponto.objeto, ponto.pos, ponto.normal.vezes(-1.0));
-
-            //System.out.println("teste");
-
-            raio.origem = ponto.pos.mais(raio.direcao);
-
-            raio.interno = false;
-
-            return raio;
+            n1 = indiceRefracao;
+            n2 = 1.0;
+            ponto = new Ponto(ponto.objeto, ponto.pos, ponto.normal.vezes(-1.0));
         } else {
             // Ray is entering the object
             n1 = 1.0;
             n2 = indiceRefracao;
         }
 
+        Vetor normal = ponto.normal;
+        double cosI = -raio.direcao.escalar(normal);
+
     
         double eta = n1 / n2;
         double k = 1.0 - eta * eta * (1.0 - cosI * cosI);
     
-        if (false){ //k < 0.0) {
+        if (k < 0.0) {
             Raio refletido = super.reflexao(ponto, raio);
 
             refletido.interno = true;
@@ -62,7 +54,10 @@ public class Refracao extends Especular{
         Vetor direcaoRefratada = raio.direcao.vezes(eta)
                 .mais(normal.vezes(eta * cosI - Math.sqrt(k)))
                 .unitario();
-        
+
+        // System.out.println("esta");
+        // direcaoRefratada.printar();
+
         
         Raio refratado = raio.refletido();
     

@@ -34,9 +34,9 @@ public class Piso extends Textura<Plano>{
 
   Vetor mapear(Vetor pi){
 
-    double valorx = (escala*eixoX.escalar(pi)/escala) % (imagem.getWidth()-1);
+    double valorx = (eixoX.escalar(pi)/escala) % (imagem.getWidth()-1);
 
-    double valory = (escala*eixoY.escalar(pi)/escala) % (imagem.getHeight()-1);
+    double valory = (eixoY.escalar(pi)/escala) % (imagem.getHeight()-1);
     
     int x = Math.abs((int)valorx);
     int y = Math.abs((int)valory);

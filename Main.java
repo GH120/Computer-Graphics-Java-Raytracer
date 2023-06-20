@@ -18,12 +18,12 @@ class Main {
 
     rodarPrograma(
               new modelos.cenas.Teste(),                //Cena escolhida
-              new Sampletracer(2, 12),//Raytracer escolhido
+              new Sampletracer(2, 16),//Raytracer escolhido
               700, 700,               //Resolução
               CAMERA_PERSPECTIVA                   //Câmera da cena escolhida
       );
 
-      new Teste();
+      // new Teste();
 
   }
 
@@ -88,7 +88,7 @@ class Teste{
 
       refratado2.printar();
 
-      cena.objetos.colisao(refratado.origem, refratado.direcao).printar();
+      cena.objetos.colisao(refratado2.origem, refratado2.direcao).printar();
 
   }
 }

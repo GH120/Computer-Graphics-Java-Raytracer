@@ -38,7 +38,13 @@ public class Vetor{
   }
 
   public Vetor mais(Vetor vetor2){
-    return this.menos(vetor2.vezes(-1));
+
+    Vetor novo = new Vetor(valores);
+
+    for(int i=0;i<valores.length;i++)
+      novo.valores[i] += vetor2.valores[i];
+
+    return novo;
   }
 
   public Vetor vezes(double c){
