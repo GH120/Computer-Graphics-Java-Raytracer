@@ -29,6 +29,4 @@ public abstract class Superficie {
     public abstract void refletir(Ponto ponto, Raio raio, List<Raio> raios);
 }
 
-abstract class MonteCarlo{}
-
 //Material has reflections, => objeto.material.reflect(ponto,raio,raios);

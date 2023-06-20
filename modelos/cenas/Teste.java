@@ -4,7 +4,7 @@ import modelos.*;
 import modelos.fontes.*;
 import modelos.objetos.*;
 import modelos.reflexoes.Especular;
-import modelos.reflexoes.Glossy;
+// import modelos.reflexoes.Glossy;
 import modelos.reflexoes.Refracao;
 
 public class Teste extends Cena{
@@ -15,10 +15,10 @@ public class Teste extends Cena{
 
             new Esfera(0, 0, -200)
             .setRaio(100)
-            .setKe(0,0,0)
-            .setKd(0,0,0)
-            .setKa(0,0,0)
-                    .addReflection(new Refracao(2, 1))
+            .setKe(0.1,0.1,0.1)
+            .setKd(0.1,0.1,0.1)
+            .setKa(0.1,0.1,0.1)
+                    .addReflection(new Refracao(4, 1))
             ,
 
             new Plano(2000,-1500,-4000)

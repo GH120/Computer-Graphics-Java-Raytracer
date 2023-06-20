@@ -80,6 +80,9 @@ public class ConcurrentRaytracer extends Raytracer{
     if (ponto == null)
       return cena.background;
 
+    if( raio.interno) 
+      ponto.normal = ponto.normal.vezes(-1);
+
     if(raio.profundidade < depth){
 
       Superficie superficie = ponto.objeto.superficie;

@@ -4,7 +4,7 @@ import modelos.*;
 import modelos.fontes.*;
 import modelos.objetos.*;
 import modelos.reflexoes.Especular;
-import modelos.reflexoes.Glossy;
+// import modelos.reflexoes.Glossy;
 
 public class NatalOtimizado extends Cena{
 

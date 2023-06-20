@@ -23,13 +23,10 @@ public class Refracao extends Especular{
     
         double n1, n2;
 
-        //System.out.println(raio.interno);
-
         if (raio.interno) {
             // Ray is exiting the object, so swap refractive indices
             n1 = indiceRefracao;
             n2 = 1.0;
-            ponto = new Ponto(ponto.objeto, ponto.pos, ponto.normal.vezes(-1.0));
         } else {
             // Ray is entering the object
             n1 = 1.0;
@@ -54,9 +51,6 @@ public class Refracao extends Especular{
         Vetor direcaoRefratada = raio.direcao.vezes(eta)
                 .mais(normal.vezes(eta * cosI - Math.sqrt(k)))
                 .unitario();
-
-        // System.out.println("esta");
-        // direcaoRefratada.printar();
 
         
         Raio refratado = raio.refletido();
