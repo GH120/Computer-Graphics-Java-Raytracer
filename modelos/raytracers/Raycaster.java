@@ -7,8 +7,6 @@ import modelos.*;
 
 public class Raycaster extends Raytracer{
 
-  LinkedList<Raio>  raios;
-
   public void render() {
 
     gerarRaios();
@@ -19,6 +17,7 @@ public class Raycaster extends Raytracer{
   public void calcularRaios(){
 
     for (int l = 0; l < linhas; l++) {
+
       for (int c = 0; c < colunas; c++) {
         
         Raio raio = raios.removeFirst();

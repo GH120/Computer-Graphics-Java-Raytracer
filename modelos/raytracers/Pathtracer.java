@@ -9,7 +9,6 @@ import modelos.reflexoes.Superficie;
 
 public class Pathtracer extends Raytracer {
 
-  LinkedList<Raio>  raios;
   int               depth;
 
   public Pathtracer(int depth){

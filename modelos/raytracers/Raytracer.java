@@ -1,5 +1,6 @@
 package modelos.raytracers;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import algebra.*;
@@ -8,14 +9,12 @@ import modelos.cameras.Camera;
 import modelos.fontes.*;
 
 public abstract class Raytracer{
-
-  public int linhas, colunas;
   
-  public Vetor[][] buffer;
-
-  public Camera camera;
-
-  public Cena cena;
+  public int              linhas, colunas;
+  public Vetor[][]        buffer; 
+  public Camera           camera; 
+  public Cena             cena;
+  public LinkedList<Raio> raios;
 
   public abstract void  render();
 
@@ -65,6 +64,16 @@ public abstract class Raytracer{
       for (int j = 0; j < linhas; j++)
         buffer[i][j] = new Vetor(0,0,0);
     return this;
+  }
+
+  public Raytracer setCena(Cena cena){
+      this.cena = cena;
+      return this;
+  }
+
+  public Raytracer setCamera(Camera camera){
+      this.camera = camera;
+      return this;
   }
 
 }

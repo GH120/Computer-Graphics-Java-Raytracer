@@ -79,7 +79,7 @@ public class Programa {
 
     timer.start();
 
-    raytracer.cena = cena;
+    raytracer.setCena(cena);
 
     canvas.raytracer = raytracer;
 
@@ -106,7 +106,7 @@ public class Programa {
 
   public Programa setCamera(Camera camera) {
     this.camera = camera;
-    this.raytracer.camera = camera;
+    this.raytracer.setCamera(camera);
     return this;
   }
 
