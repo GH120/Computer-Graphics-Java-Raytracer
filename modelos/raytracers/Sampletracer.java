@@ -13,9 +13,9 @@ public class Sampletracer extends Raytracer{
     int               pixelCount;
     Raytracer         raytracer;
 
-    public Sampletracer(Raytracer tracer, int rays){
+    public Sampletracer(Raytracer tracer, int pixelCount){
         this.raytracer = tracer;
-        this.pixelCount = rays;
+        this.pixelCount = pixelCount;
     }
 
     public void render() {

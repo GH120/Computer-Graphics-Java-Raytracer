@@ -16,14 +16,13 @@ public class Raycaster extends Raytracer{
 
   public void calcularRaios(){
 
-    for (int l = 0; l < linhas; l++) {
+    while(!raios.isEmpty()){
+      
+      Raio raio = raios.removeFirst();
 
-      for (int c = 0; c < colunas; c++) {
-        
-        Raio raio = raios.removeFirst();
-
-        buffer[raio.coluna][raio.linha] = buscarCor(raio, null);
-      }
+      int l = raio.linha; int c = raio.coluna;
+      
+      buffer[c][l] = buffer[c][l].mais(buscarCor(raio, raios));
     }
   }
 
