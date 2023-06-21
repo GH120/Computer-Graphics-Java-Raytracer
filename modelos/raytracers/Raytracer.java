@@ -1,5 +1,7 @@
 package modelos.raytracers;
 
+import java.util.List;
+
 import algebra.*;
 import modelos.*;
 import modelos.cameras.Camera;
@@ -7,9 +9,7 @@ import modelos.fontes.*;
 
 public abstract class Raytracer{
 
-  public int linhas;
-
-  public int colunas;
+  public int linhas, colunas;
   
   public Vetor[][] buffer;
 
@@ -17,7 +17,13 @@ public abstract class Raytracer{
 
   public Cena cena;
 
-  public abstract void render();
+  public abstract void  render();
+
+  public abstract void  gerarRaios();
+
+  public abstract void  calcularRaios();
+
+  public abstract Vetor buscarCor(Raio raio, List<Raio> pilha);
 
   Vetor iluminar(Ponto ponto, Vetor viewer){
 

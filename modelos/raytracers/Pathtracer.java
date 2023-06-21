@@ -1,9 +1,11 @@
 package modelos.raytracers;
 
 import java.util.LinkedList;
+import java.util.List;
 
 import algebra.*;
 import modelos.*;
+import modelos.reflexoes.Superficie;
 
 public class Pathtracer extends Raytracer {
 
@@ -18,30 +20,37 @@ public class Pathtracer extends Raytracer {
 
     gerarRaios();
 
+    calcularRaios();
+  }
+
+  public void calcularRaios(){
+
     while(!raios.isEmpty()){
       
       Raio raio = raios.removeFirst();
 
       int l = raio.linha; int c = raio.coluna;
       
-      buffer[c][l] = buffer[c][l].mais(buscaCor(raio));
+      buffer[c][l] = buffer[c][l].mais(buscarCor(raio, raios));
     }
   }
 
-  Vetor buscaCor(Raio raio) {
+  public Vetor buscarCor(Raio raio, List<Raio> pilha) {
 
-    Ponto ponto = cena.objetos.colisao(raio.origem,
-        raio.direcao);
+    Ponto ponto = cena.objetos.colisao(raio.origem, raio.direcao);
 
     if (ponto == null)
-      return new Vetor(0,0,0);
+      return cena.background;
 
-    //Reflexão: adiciona a pilha o novo raio
+    if( raio.interno) 
+      ponto.normal = ponto.normal.vezes(-1);
+
     if(raio.profundidade < depth){
-      
-      Raio reflexao = raio.reflexao(ponto);
-      
-      raios.add(reflexao);
+
+      Superficie superficie = ponto.objeto.superficie;
+
+      if(superficie != null) superficie.refletir(ponto, raio, pilha);
+
     }
     
     Vetor luz = iluminar(ponto, raio.direcao);
@@ -49,7 +58,7 @@ public class Pathtracer extends Raytracer {
     return luz.mult(raio.intensidade);
   }
 
-  void gerarRaios() {
+  public void gerarRaios() {
 
     raios = new LinkedList<>();
 

@@ -1,108 +1,95 @@
-package modelos.raytracers;
+// package modelos.raytracers;
 
-import java.util.LinkedList;
-import java.util.Random;
+// import java.util.LinkedList;
+// import java.util.List;
+// import java.util.Random;
 
-import algebra.*;
-import modelos.*;
-import modelos.objetos.Esfera;
-import modelos.objetos.Piso;
-import modelos.reflexoes.Superficie;
+// import algebra.*;
+// import modelos.*;
+// import modelos.objetos.Esfera;
+// import modelos.objetos.Piso;
+// import modelos.reflexoes.Superficie;
 
-public class Sampletracer extends Raytracer{
-    LinkedList<Raio>  raios;
-    int               depth;
-    int         rayperpixel;
+// public class Sampletracer extends Raytracer{
 
-    public Sampletracer(int depth, int rays){
-        this.depth = depth;
-        this.rayperpixel = rays;
-    }
+//     Raytracer        raytracer;
+//     LinkedList<Raio> raios;
+//     int              pixelCount;
 
-    public void render() {
+//     public Sampletracer(Raytracer raytracer, int pixelCount){
+//         this.raytracer  = raytracer;
+//         this.pixelCount = pixelCount;
+//     }
 
-        gerarRaios();
+//     public void render() {
 
-        while(!raios.isEmpty()){
+//         gerarRaios();
 
-            Raio raio = raios.removeFirst();
+//         calcularRaios(this.raytracer);
+//     }
 
-            int l = raio.linha; int c = raio.coluna;
 
-            buffer[c][l] = buffer[c][l].mais(buscaCor(raio));
-        }
-    }
+//     public void calcularRaios(Raytracer raytracer){
 
-    Vetor buscaCor(Raio raio) {
+//         raytracer.calcularRaios(this);
 
-        Ponto ponto = cena.objetos.colisao(raio.origem, raio.direcao);
+//     }
 
-        if (ponto == null)
-            return cena.background;
+//     public Vetor buscarCor(Raio raio, List<Raio> raios) {
 
-        if(raio.profundidade < depth){
+//         return raytracer.buscarCor(raio, raios);
+//     }
 
-            Superficie superficie = ponto.objeto.superficie;
+//     public void gerarRaios() {
 
-            if(superficie != null) superficie.refletir(ponto, raio, raios);
+//         raios = new LinkedList<>();
 
-        }
+//         double w = camera.wJanela;
+//         double h = camera.hJanela;
 
-        Vetor luz = iluminar(ponto, raio.direcao);
+//         double deltax = w / linhas;
+//         double deltay = h / colunas;
 
-        return luz.mult(raio.intensidade);
-    }
+//         Random random = new Random();
 
-    void gerarRaios() {
+//         for (int l = 0; l < linhas; l++) {
+//             double randomDeltay = random.nextDouble();
+//             for (int c = 0; c < colunas; c++) {
+//                 double randomDeltax = random.nextDouble();
+//                 for(int k = 0; k < pixelCount; k++ ){
+//                     double y = h / 2 - deltay * l;
+//                     double x = w / 2 - deltax * c;
 
-        raios = new LinkedList<>();
+//                     gerarRaio(x - randomDeltax, y - randomDeltay, c, l);
+//                 }
+//             }
+//         }
+//     }
 
-        double w = camera.wJanela;
-        double h = camera.hJanela;
+//     void gerarRaio(double x, double y, int c, int l) {
 
-        double deltax = w / linhas;
-        double deltay = h / colunas;
+//         Raio raio = new Raio();
 
-        Random random = new Random();
+//         raio.linha = l;
 
-        for (int l = 0; l < linhas; l++) {
-            double randomDeltay = random.nextDouble();
-            for (int c = 0; c < colunas; c++) {
-                double randomDeltax = random.nextDouble();
-                for(int k = 0; k < rayperpixel; k++ ){
-                    double y = h / 2 - deltay * l;
-                    double x = w / 2 - deltax * c;
+//         raio.coluna = c;
 
-                    gerarRaio(x - randomDeltax, y - randomDeltay, c, l);
-                }
-            }
-        }
-    }
+//         double intensity = 1.0/pixelCount;
 
-    void gerarRaio(double x, double y, int c, int l) {
+//         // posicao x,y da camera transformada para as coordenadas de mundo
+//         raio.origem = camera.toWorld((new Posicao(x, y, 0)));
 
-        Raio raio = new Raio();
+//         // raio que incide sobre o pixel[c][l]
+//         raio.direcao = camera.projecao.getDirecao(raio.origem);
 
-        raio.linha = l;
+//         // O coeficiente de reflexão de multiplas colisões
+//         raio.intensidade = new Vetor(intensity, intensity, intensity);
 
-        raio.coluna = c;
+//         raio.origem = raio.origem.tresD();
+//         raio.direcao = raio.direcao.tresD();
 
-        double intensity = 1.0/rayperpixel;
+//         raios.add(raio);
 
-        // posicao x,y da camera transformada para as coordenadas de mundo
-        raio.origem = camera.toWorld((new Posicao(x, y, 0)));
-
-        // raio que incide sobre o pixel[c][l]
-        raio.direcao = camera.projecao.getDirecao(raio.origem);
-
-        // O coeficiente de reflexão de multiplas colisões
-        raio.intensidade = new Vetor(intensity, intensity, intensity);
-
-        raio.origem = raio.origem.tresD();
-        raio.direcao = raio.direcao.tresD();
-
-        raios.add(raio);
-
-    }
-}
+//     }
+// }
 

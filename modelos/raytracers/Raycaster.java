@@ -1,10 +1,47 @@
 package modelos.raytracers;
+import java.util.LinkedList;
+import java.util.List;
+
 import algebra.*;
 import modelos.*;
 
 public class Raycaster extends Raytracer{
 
+  LinkedList<Raio>  raios;
+
   public void render() {
+
+    gerarRaios();
+
+    calcularRaios();  
+  }
+
+  public void calcularRaios(){
+
+    for (int l = 0; l < linhas; l++) {
+      for (int c = 0; c < colunas; c++) {
+        
+        Raio raio = raios.removeFirst();
+
+        buffer[raio.coluna][raio.linha] = buscarCor(raio, null);
+      }
+    }
+  }
+
+  public Vetor buscarCor(Raio raio, List<Raio> pilha){
+
+    Ponto ponto = cena.objetos.colisao(raio.origem, raio.direcao);
+    
+    if(ponto == null) return cena.background;
+
+    Vetor luz = iluminar(ponto, raio.direcao);
+
+    return luz;
+  }
+
+  public void gerarRaios(){
+
+    raios = new LinkedList<Raio>();
 
     double w = camera.wJanela;
     double h = camera.hJanela;
@@ -17,37 +54,34 @@ public class Raycaster extends Raytracer{
       for (int c = 0; c < colunas; c++) {
         double x = w / 2 - deltax / 2 - deltax * c;
         
-        calcularRaio(x,y,c,l);
+        raios.add(gerarRaio(x,y,c,l));
       }
     }
-  }
 
-  Vetor buscaCor(Vetor p0, Vetor dr){
-
-    Ponto ponto = cena.objetos.colisao(p0, dr);
-
-    // if(!ponto.objeto.inalterado()){
-    //   if(ponto != null)
-    //     ponto = ponto.toWorld();
-    // }
-    
-    if(ponto == null) return cena.background;
-
-    Vetor luz = iluminar(ponto, dr);
-
-    return luz;
   }
   
-  void calcularRaio(double x, double y, int c, int l){
-    
-    //posicao x,y da camera transformada para as coordenadas de mundo
-    Vetor p = camera.toWorld((new Posicao(x, y, 0)));
-    
-    //raio que incide sobre o pixel
-    Vetor direcao = camera.projecao.getDirecao(p);
+  Raio gerarRaio(double x, double y, int c, int l) {
 
-    //Guarda a cor no pixel do buffer
-    buffer[c][l] = buscaCor(p.tresD(), direcao);
+    Raio raio = new Raio();
+
+    raio.linha = l;
+
+    raio.coluna = c;
+
+    // posicao x,y da camera transformada para as coordenadas de mundo
+    raio.origem = camera.toWorld((new Posicao(x, y, 0)));
+
+    // raio que incide sobre o pixel[c][l]
+    raio.direcao = camera.projecao.getDirecao(raio.origem);
+
+    // O coeficiente de reflexão de multiplas colisões
+    raio.intensidade = new Vetor(1, 1, 1);
+
+    raio.origem = raio.origem.tresD();
     
+    raio.direcao = raio.direcao.tresD();
+
+    return raio;
   }
+
 }
