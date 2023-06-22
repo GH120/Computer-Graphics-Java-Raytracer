@@ -47,6 +47,13 @@ public class Vetor{
     return novo;
   }
 
+  public void add(Vetor vetor2){
+
+    for(int i=0; i < valores.length; i++){
+      valores[i] += vetor2.valores[i];
+    }
+  }
+
   public Vetor vezes(double c){
     Vetor novo = new Vetor(valores);
     for(int i=0;i<valores.length;i++){

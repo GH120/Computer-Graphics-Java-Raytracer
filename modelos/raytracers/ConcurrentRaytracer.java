@@ -108,7 +108,7 @@ public class ConcurrentRaytracer extends Raytracer{
               
               Vetor cor = buscarCor(raio, linhasDoProcesso);
               
-              linhasBuffer[l][c] = linhasBuffer[l][c].mais(cor);
+              linhasBuffer[l][c].add(cor);
 
             }
           }
@@ -118,7 +118,7 @@ public class ConcurrentRaytracer extends Raytracer{
 
           for(int j=0;j<threadLinhas;j++){
             for(int k=0;k<colunas;k++){
-              buffer[k][j + linhaInicial] = buffer[k][j+linhaInicial].mais(linhasBuffer[j][k]);
+              buffer[k][j + linhaInicial].add(linhasBuffer[j][k]);
             }
           }
 
