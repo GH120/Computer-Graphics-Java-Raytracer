@@ -34,7 +34,7 @@ public class Raycaster extends Raytracer{
 
     Vetor luz = iluminar(ponto, raio.direcao);
 
-    return luz;
+    return luz.mult(raio.intensidade);
   }
 
   public void gerarRaios(){

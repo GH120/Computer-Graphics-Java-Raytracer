@@ -18,7 +18,7 @@ class Main {
 
     rodarPrograma(
               new NatalOtimizado(),                //Cena escolhida
-              new Sampletracer(new ConcurrentRaytracer(3),8),       //Raytracer escolhido
+              new ConcurrentRaytracer(new Sampletracer(new Pathtracer(4),8)),       //Raytracer escolhido
               700, 700,                    //Resolução
               CAMERA_PERSPECTIVA                        //Câmera da cena escolhida
       );

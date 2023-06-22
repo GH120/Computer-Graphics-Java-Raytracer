@@ -2,6 +2,7 @@ package modelos.raytracers;
 
 import algebra.*;
 import modelos.*;
+import modelos.cameras.Camera;
 import modelos.reflexoes.*;
 
 import java.util.*;
@@ -12,12 +13,12 @@ import java.util.concurrent.TimeUnit;
 
 public class ConcurrentRaytracer extends Raytracer{
 
-  private static final          int  NUM_THREADS = 10;
-  private                       int  depth;
+  private Raytracer raytracer;
+  private static final int  NUM_THREADS = 10;
   private LinkedList<Callable<Void>> threadsDeRenderizarLinhas;
 
-  public ConcurrentRaytracer(int depth){
-    this.depth = depth;
+  public ConcurrentRaytracer(Raytracer raytracer){
+    this.raytracer = raytracer;
   }
 
   public void render() {
@@ -26,6 +27,22 @@ public class ConcurrentRaytracer extends Raytracer{
 
     calcularRaios();
     
+  }
+
+  public Vetor buscarCor(Raio raio, List<Raio> pilha) {
+
+    return raytracer.buscarCor(raio, pilha);
+  }
+
+  public void gerarRaios() {
+
+    raytracer.linhas = linhas;
+
+    raytracer.colunas = colunas;
+
+    raytracer.gerarRaios();
+
+    raios = raytracer.raios;
   }
 
   //Executa as threads
@@ -52,8 +69,8 @@ public class ConcurrentRaytracer extends Raytracer{
   }
 
   //Cria as threads para renderizar as linhas em paralelo
-  //Thread 1 => linhas 1,11,21,...
-  //Thread 2 => linhas 2,12,22,...
+  //Thread 1 => linhas 1 a 100
+  //Thread 2 => linhas 100 a 200
   //...
   public void criarThreads(LinkedList<Raio> pilha){
 
@@ -83,17 +100,17 @@ public class ConcurrentRaytracer extends Raytracer{
       Callable<Void> processo = () -> {
 
           try{
-          while(!linhasDoProcesso.isEmpty()){
+            while(!linhasDoProcesso.isEmpty()){
 
-            Raio raio = linhasDoProcesso.poll();
+              Raio raio = linhasDoProcesso.poll();
 
-            int l = raio.linha - linhaInicial; int c = raio.coluna;
-            
-            Vetor cor = buscarCor(raio, linhasDoProcesso);
-            
-            linhasBuffer[l][c] = linhasBuffer[l][c].mais(cor);
+              int l = raio.linha - linhaInicial; int c = raio.coluna;
+              
+              Vetor cor = buscarCor(raio, linhasDoProcesso);
+              
+              linhasBuffer[l][c] = linhasBuffer[l][c].mais(cor);
 
-          }
+            }
           }
           catch(Exception e){
             e.printStackTrace();
@@ -113,72 +130,23 @@ public class ConcurrentRaytracer extends Raytracer{
       threadsDeRenderizarLinhas.add(processo);
     }
   }
+
+  public Raytracer gerarBuffer(){
+        super.gerarBuffer();
+        raytracer.buffer = this.buffer;
+        return this;
+    }
+
+    public Raytracer setCena(Cena cena){
+        this.cena = cena;
+        this.raytracer.setCena(cena);
+        return this;
+    }
   
-
-  public Vetor buscarCor(Raio raio, List<Raio> linhas) {
-
-    Ponto ponto = cena.objetos.colisao(raio.origem, raio.direcao);
-
-    if (ponto == null)
-      return cena.background;
-
-    if( raio.interno) 
-      ponto.normal = ponto.normal.vezes(-1);
-
-    if(raio.profundidade < depth){
-
-      Superficie superficie = ponto.objeto.superficie;
-
-      if(superficie != null) superficie.refletir(ponto, raio, linhas);
-
+    public Raytracer setCamera(Camera camera){
+        this.camera = camera;
+        this.raytracer.setCamera(camera);
+        return this;
     }
-    
-    Vetor luz = iluminar(ponto, raio.direcao);
-    
-    return luz.mult(raio.intensidade);
-  }
-
-   public void gerarRaios() {
-
-    raios = new LinkedList<>();
-
-    double w = camera.wJanela;
-    double h = camera.hJanela;
-
-    double deltax = w / linhas;
-    double deltay = h / colunas;
-
-    for (int l = 0; l < linhas; l++) {
-      double y = h / 2 - deltay / 2 - deltay * l;
-      for (int c = 0; c < colunas; c++) {
-        double x = w / 2 - deltax / 2 - deltax * c;
-        
-        gerarRaio(x, y, c, l);
-      }
-    }
-  }
-
-  void gerarRaio(double x, double y, int c, int l) {
-
-    Raio raio = new Raio();
-
-    raio.linha = l;
-
-    raio.coluna = c;
-
-    // posicao x,y da camera transformada para as coordenadas de mundo
-    raio.origem = camera.toWorld((new Posicao(x, y, 0)));
-
-    // raio que incide sobre o pixel[c][l]
-    raio.direcao = camera.projecao.getDirecao(raio.origem);
-
-    // O coeficiente de reflexão de multiplas colisões
-    raio.intensidade = new Vetor(1, 1, 1);
-
-    raio.origem = raio.origem.tresD();
-    raio.direcao = raio.direcao.tresD();
-
-    raios.add(raio);
-
-  }
+  
 }
