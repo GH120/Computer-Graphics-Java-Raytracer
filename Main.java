@@ -17,8 +17,8 @@ class Main {
   public static void main(String[] args) {
 
     rodarPrograma(
-              new modelos.cenas.Teste(),                //Cena escolhida
-              new Sampletracer(new Pathtracer(2), 2),       //Raytracer escolhido
+              new NatalOtimizado(),                //Cena escolhida
+              new Sampletracer(new ConcurrentRaytracer(3),8),       //Raytracer escolhido
               700, 700,                    //Resolução
               CAMERA_PERSPECTIVA                        //Câmera da cena escolhida
       );

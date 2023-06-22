@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 public class ConcurrentRaytracer extends Raytracer{
 
-  private static final          int  NUM_THREADS = Runtime.getRuntime().availableProcessors();
+  private static final          int  NUM_THREADS = 10;
   private                       int  depth;
   private LinkedList<Callable<Void>> threadsDeRenderizarLinhas;
 
@@ -33,12 +33,11 @@ public class ConcurrentRaytracer extends Raytracer{
 
     ExecutorService executorService = Executors.newFixedThreadPool(NUM_THREADS);
 
-    for(int i=0; i < NUM_THREADS;i++){
+    criarThreads(raios);
 
-      Callable<Void> thread = threadsDeRenderizarLinhas.removeFirst();
+    for(Callable<Void> thread : threadsDeRenderizarLinhas) {
 
-      executorService.submit(thread);
-
+        executorService.submit(thread);
     }
 
     executorService.shutdown();
@@ -56,14 +55,21 @@ public class ConcurrentRaytracer extends Raytracer{
   //Thread 1 => linhas 1,11,21,...
   //Thread 2 => linhas 2,12,22,...
   //...
-  public void gerarRaios(){
+  public void criarThreads(LinkedList<Raio> pilha){
 
+    //Lista que guarda as threads a serem executadas
     threadsDeRenderizarLinhas = new LinkedList<>();
 
-    for(int i=0; i < NUM_THREADS;i++){
+    for(int i=0; i < NUM_THREADS; i++){
 
-      final int threadLinhas = linhas/NUM_THREADS;
-      final int threadIndex  = i;
+      //Informações para separar os raios em partes a serem executadas
+      //Buffer para guardar as cores e subpilha de execução dos raios rodada na thread
+      final int threadLinhas  = linhas/NUM_THREADS;
+      final int threadRaios   = pilha.size()/NUM_THREADS;
+      final int threadIndex   = i;
+      final int linhaInicial  = threadLinhas*i;
+      final int comeco        = threadIndex*threadRaios;
+      final int fim           = comeco + threadRaios;
 
       Vetor[][] linhasBuffer = new Vetor[threadLinhas][colunas];
 
@@ -71,34 +77,43 @@ public class ConcurrentRaytracer extends Raytracer{
         for(int k=0;k<colunas;k++)
           linhasBuffer[j][k] = new Vetor(0,0,0);
 
+      final LinkedList<Raio> linhasDoProcesso = new LinkedList<>(pilha.subList(comeco, fim));
+
+      //Processo rodado na thread, calcula os raios das linhas do processo e guarda no buffer das linhas
       Callable<Void> processo = () -> {
 
-          LinkedList<Raio> linhasDoProcesso = renderLinhas(threadIndex, threadLinhas);
-
+          try{
           while(!linhasDoProcesso.isEmpty()){
 
             Raio raio = linhasDoProcesso.poll();
 
-            int l = raio.linha; int c = raio.coluna;
-
+            int l = raio.linha - linhaInicial; int c = raio.coluna;
+            
             Vetor cor = buscarCor(raio, linhasDoProcesso);
-
+            
             linhasBuffer[l][c] = linhasBuffer[l][c].mais(cor);
 
+          }
+          }
+          catch(Exception e){
+            e.printStackTrace();
           }
 
           for(int j=0;j<threadLinhas;j++){
             for(int k=0;k<colunas;k++){
-              buffer[k][j*NUM_THREADS + threadIndex] = buffer[k][j*NUM_THREADS + threadIndex].mais(linhasBuffer[j][k]);
+              buffer[k][j + linhaInicial] = buffer[k][j+linhaInicial].mais(linhasBuffer[j][k]);
             }
           }
+
 
           return null;
       };
 
+      //Adiciona o processo a lista...
       threadsDeRenderizarLinhas.add(processo);
     }
   }
+  
 
   public Vetor buscarCor(Raio raio, List<Raio> linhas) {
 
@@ -123,9 +138,9 @@ public class ConcurrentRaytracer extends Raytracer{
     return luz.mult(raio.intensidade);
   }
 
-  LinkedList<Raio> renderLinhas(int processo, int tamanho) {
+   public void gerarRaios() {
 
-    LinkedList<Raio> raios = new LinkedList<>();
+    raios = new LinkedList<>();
 
     double w = camera.wJanela;
     double h = camera.hJanela;
@@ -133,19 +148,17 @@ public class ConcurrentRaytracer extends Raytracer{
     double deltax = w / linhas;
     double deltay = h / colunas;
 
-    for (int l = 0; l < tamanho; l++) {
-      double y = h / 2 - deltay / 2 - deltay * (l*NUM_THREADS + processo);
+    for (int l = 0; l < linhas; l++) {
+      double y = h / 2 - deltay / 2 - deltay * l;
       for (int c = 0; c < colunas; c++) {
         double x = w / 2 - deltax / 2 - deltax * c;
         
-        raios.add(gerarRaio(x, y, c, l));
+        gerarRaio(x, y, c, l);
       }
     }
-
-    return raios;
   }
 
-  Raio gerarRaio(double x, double y, int c, int l) {
+  void gerarRaio(double x, double y, int c, int l) {
 
     Raio raio = new Raio();
 
@@ -165,6 +178,7 @@ public class ConcurrentRaytracer extends Raytracer{
     raio.origem = raio.origem.tresD();
     raio.direcao = raio.direcao.tresD();
 
-    return raio;
+    raios.add(raio);
+
   }
 }

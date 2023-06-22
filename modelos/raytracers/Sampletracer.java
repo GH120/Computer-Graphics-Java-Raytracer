@@ -23,6 +23,8 @@ public class Sampletracer extends Raytracer{
         gerarRaios();
 
         raytracer.raios = raios;
+        raytracer.linhas = linhas;
+        raytracer.colunas = colunas;
 
         calcularRaios();
     }
@@ -50,10 +52,10 @@ public class Sampletracer extends Raytracer{
         Random random = new Random();
 
         for (int l = 0; l < linhas; l++) {
-            double randomDeltay = random.nextDouble();
             for (int c = 0; c < colunas; c++) {
-                double randomDeltax = random.nextDouble();
                 for(int k = 0; k < pixelCount; k++ ){
+                    double randomDeltay = random.nextDouble();
+                    double randomDeltax = random.nextDouble();
                     double y = h / 2 - deltay * l;
                     double x = w / 2 - deltax * c;
 
