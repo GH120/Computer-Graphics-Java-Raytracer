@@ -97,7 +97,7 @@ public class NatalOtimizado extends Cena{
             //O que acontece quando rotaciona o conjunto é que alguns rotacionam e outros não
     );
 
-    // objetos.addReflection(new Especular());
+    objetos.addReflection(new Especular());
 
     Fontes(
       new Fonte(-100, 140, -20).setCor(0.3f,0.3f,0.3f)

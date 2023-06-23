@@ -3,7 +3,6 @@ package modelos.raytracers;
 import algebra.*;
 import modelos.*;
 import modelos.cameras.Camera;
-import modelos.reflexoes.*;
 
 import java.util.*;
 import java.util.concurrent.Callable;
