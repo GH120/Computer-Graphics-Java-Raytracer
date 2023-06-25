@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 public class ConcurrentRaytracer extends Raytracer{
 
   private Raytracer raytracer;
-  private static final int  NUM_THREADS = 10;
+  private static final int  NUM_THREADS = 5;
   private LinkedList<Callable<Void>> threadsDeRenderizarLinhas;
 
   public ConcurrentRaytracer(Raytracer raytracer){
