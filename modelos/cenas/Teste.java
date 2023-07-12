@@ -3,9 +3,7 @@ import algebra.*;
 import modelos.*;
 import modelos.fontes.*;
 import modelos.objetos.*;
-import modelos.reflexoes.Especular;
-// import modelos.reflexoes.Glossy;
-import modelos.reflexoes.Refracao;
+import modelos.reflexoes.*;
 
 public class Teste extends Cena{
 
@@ -15,10 +13,10 @@ public class Teste extends Cena{
 
             new Esfera(0, 0, -200)
             .setRaio(100)
-            .setKe(0.1,0.1,0.1)
-            .setKd(0.1,0.1,0.1)
-            .setKa(0.1,0.1,0.1)
-                    .addReflection(new Refracao(4, 1))
+            .setKe(1,1,1)
+            .setKd(1,1,1)
+            .setKa(1,1,1)
+                    .addReflection(new MonteCarlo())
             ,
 
             new Plano(2000,-1500,-4000)

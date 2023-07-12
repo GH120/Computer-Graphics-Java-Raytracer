@@ -18,7 +18,7 @@ class Main {
 
     rodarPrograma(
               new modelos.cenas.Teste(),                //Cena escolhida
-              new Sampletracer(new ConcurrentRaytracer(new Pathtracer(10)),40),       //Raytracer escolhido
+              new Sampletracer(new ConcurrentRaytracer(new Pathtracer(2)), 40),       //Raytracer escolhido
               700, 700,                    //Resolução
               CAMERA_PERSPECTIVA                        //Câmera da cena escolhida
       );
