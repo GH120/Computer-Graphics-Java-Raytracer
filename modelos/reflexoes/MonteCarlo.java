@@ -22,7 +22,7 @@ public class MonteCarlo extends Superficie{
 
         Vetor direcao = new Vetor(x,y,z);
 
-        Vetor normal  = ponto.normal;
+        Vetor normal  = ponto.normal.vezes(-1);
         Vetor direita = normal.ortogonal();
         Vetor frente  = direita.ortogonal();
 
