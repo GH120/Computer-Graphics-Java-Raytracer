@@ -9,28 +9,21 @@ public class Glossy extends Superficie{
 
     double roughness;
 
-    public Glossy(double roughness, int pixelCount, double eficiencia){
+    public Glossy(double roughness, double eficiencia){
         this.roughness  = roughness;
-        this.eficiencia = eficiencia/pixelCount;
-        this.pixelCount = pixelCount;
+        this.eficiencia = eficiencia;
     }
 
     public void refletir(Ponto ponto, Raio raio, List<Raio> raios){
 
-        for(int i=0; i < pixelCount;i++){
 
-            Raio refletido = reflexao(ponto, raio);
+        Raio refletido = reflexao(ponto, raio);
 
-            if(refletido.intensidade.escalar(refletido.intensidade) < 0.001) continue;
+        if(refletido.intensidade.escalar(refletido.intensidade) < 0.001) return;
 
-            refletido.intensidade = refletido.intensidade.vezes(eficiencia);
+        refletido.intensidade = refletido.intensidade.vezes(eficiencia);
 
-            // if(refletido.intensidade.modulo() > 0) {
-            //     refletido.intensidade.printar();
-            //     System.out.println(refletido.profundidade);
-            // }
-            raios.add(refletido);
-        }
+        raios.add(refletido);
     }
 
     public Raio reflexao(Ponto ponto, Raio raio) {

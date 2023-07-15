@@ -16,7 +16,7 @@ public class Teste extends Cena{
             .setKe(1,1,1)
             .setKd(1,1,1)
             .setKa(1,1,1)
-                    .addReflection(new MonteCarlo())
+                    .addReflection(new Difusa())
             ,
 
             new Plano(2000,-1500,-4000)

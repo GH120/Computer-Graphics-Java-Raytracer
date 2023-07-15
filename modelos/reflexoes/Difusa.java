@@ -7,7 +7,7 @@ import java.util.Random;
 
 import algebra.*;
 
-public class MonteCarlo extends Superficie{
+public class Difusa extends Superficie{
 
     Random rand = new Random();
     

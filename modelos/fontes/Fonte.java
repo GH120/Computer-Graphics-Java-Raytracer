@@ -22,12 +22,12 @@ public class Fonte{
     
     Vetor l = ponto.pos.menos(posicao).unitario();
 
-    Vetor Ieye = difusa(n,v,l,ponto.getKd()).mais(especular(n,v,l,ponto.getKe()));
+    Vetor Ieye = difusa(n,l,ponto.getKd()).mais(especular(n,v,l,ponto.getKe()));
 
     return Ieye;
   }
 
-  Vetor difusa(Vetor n, Vetor v, Vetor l, Vetor Kd){
+  Vetor difusa(Vetor n, Vetor l, Vetor Kd){
     return If.mult(Kd).vezes(-l.escalar(n));
   }
 

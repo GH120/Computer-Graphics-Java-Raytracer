@@ -23,7 +23,6 @@ import java.util.List;
 
 public abstract class Superficie {
 
-    int    pixelCount;
     double eficiencia = 1.0;
 
     public abstract void refletir(Ponto ponto, Raio raio, List<Raio> raios);
