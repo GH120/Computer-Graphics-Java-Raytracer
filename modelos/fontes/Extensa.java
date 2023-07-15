@@ -7,7 +7,7 @@ public class Extensa extends Fonte {
     
     Objeto geometria;
 
-    Extensa(Objeto geometria){
+    public Extensa(Objeto geometria){
         this.geometria = geometria;
     }
 
@@ -16,7 +16,7 @@ public class Extensa extends Fonte {
     //Ele vai pegar o ponto que o raio acerta essa fonte luminosa extensa,
     //Levar em conta o desvio que custa eficiencia da luz, além da intensidade do raio
     //A intensidade resultante é a contribuida para o resultado final
-    public Vetor luz(Ponto origem, Ponto colidido, Raio raio){
+    public Vetor luz(Ponto colidido, Raio raio){
 
         Vetor normal = colidido.normal;
 
@@ -32,7 +32,7 @@ public class Extensa extends Fonte {
         return raio.intensidade.mult(eficiencia);
     }
 
-    Ponto colisao(Raio raio){
+    public Ponto colisao(Raio raio){
         return geometria.colisao(raio.origem, raio.direcao);
     }
 }

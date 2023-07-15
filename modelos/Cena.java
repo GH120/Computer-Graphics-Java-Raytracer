@@ -16,8 +16,9 @@ public abstract class Cena{
   public Vetor background = Vetor.pixel(Color.GRAY.getRGB());  
   
   public Conjunto           objetos;
-  public ArrayList<Fonte>   fontes  = new ArrayList<>();
-  public ArrayList<Camera>  cameras = new ArrayList<>();
+  public ArrayList<Fonte>   fontes         = new ArrayList<>();
+  public ArrayList<Camera>  cameras        = new ArrayList<>();
+  public ArrayList<Extensa> fontesExtensas = new ArrayList<>();
 
   public void Objetos(Objeto ...conjunto){
     objetos = new Conjunto(conjunto);
@@ -26,6 +27,12 @@ public abstract class Cena{
   public void Fontes(Fonte ...luzes){
     for(Fonte fonte : luzes){
       fontes.add(fonte);
+    }
+  }
+
+  public void FontesExtensas(Extensa ...luzes){
+    for(Extensa fonte : luzes){
+      fontesExtensas.add(fonte);
     }
   }
 

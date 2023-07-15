@@ -1,14 +1,20 @@
 package modelos.raytracers;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import algebra.*;
 import modelos.*;
+import modelos.fontes.*;
 import modelos.reflexoes.Superficie;
 
+//Com iluminação global
 public class MonteCarlo {
 
     int depth = 3;
-    LinkedList<Raio> samples =null;
+    int numberSamples = 10;
+    int colisionCount = 4;
+    LinkedList<Raio> samples = new LinkedList<Raio>();
+    Cena cena;
 
     //CalcularSamplesDaLuz => pega as luzes da cena e calcula samples delas
     //Com esses samples, vamos ter pontos onde temos certeza que a luz incide
@@ -50,5 +56,77 @@ public class MonteCarlo {
         
         // return luz.mult(raio.intensidade);
         return null;
+    }
+
+    Vetor iluminar(Ponto ponto, Vetor viewer){
+
+        //Leva em conta apenas as luzes pontuais
+        Vetor luz = null; //super.iluminar(ponto, viewer);
+
+        
+
+        return luz;
+    }
+
+    Vetor iluminarExtenso(Ponto ponto, Raio raio){
+
+        Vetor iluminacao = new Vetor(0,0,0);
+
+        //Leva agora em conta as luzes extensas
+
+        raio.profundidade = 0;
+
+        for(int i=0; i < numberSamples; i++)
+            refletir(ponto, raio, samples);
+
+        for(int colisions = 0; colisions < colisionCount;){ 
+            
+            Raio refletido = samples.pop();
+
+            if(refletido.profundidade > depth) continue;
+
+            Ponto   colidiuObjeto  = cena.objetos.colisao(refletido.origem, refletido.direcao);
+            Ponto   colidiuFonte   = null;
+            Extensa extensa        = null;
+
+            //TODO: Pegar o ponto mais proximo, ele só pega a primeira colisão
+            for(Extensa fonte : cena.fontesExtensas){
+
+                extensa = fonte;
+                
+                colidiuFonte = fonte.colisao(refletido);
+
+                if(colidiuFonte != null) break;
+            }
+
+            boolean atingiuFonte = raio.pontoMaisProximo(colidiuFonte, colidiuObjeto);
+
+            if(atingiuFonte){
+                Vetor luz = extensa.luz(colidiuFonte, raio);
+
+                iluminacao.add(luz);
+                
+                colisions++;
+            }
+            else refletir(colidiuObjeto, raio, samples);
+
+            //Adiciona refletido novo se os samples tiverem se exaurido,
+            //Mas não terem batido pelo menos 10 na fonte extensa
+            if(samples.isEmpty()) refletir(ponto, raio, samples);
+        }
+
+        iluminacao.vezes(1/colisionCount);
+
+        return null;
+    }
+
+    void refletir(Ponto ponto, Raio raio, LinkedList<Raio> pilha){
+        
+
+        Superficie superficie = ponto.objeto.superficie;
+
+        if(superficie == null) return;
+
+        superficie.refletir(ponto, raio, pilha);
     }
 }

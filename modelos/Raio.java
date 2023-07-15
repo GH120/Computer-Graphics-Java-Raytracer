@@ -50,6 +50,17 @@ public class Raio{
     return refletido;
   }
 
+  public boolean pontoMaisProximo(Ponto ponto1, Ponto ponto2){
+
+    if(ponto1 == null) return false;
+    if(ponto2 == null) return true;
+
+    double distancia1 = ponto1.pos.menos(origem).escalar(direcao);
+    double distancia2 = ponto2.pos.menos(origem).escalar(direcao);
+
+    return distancia1 < distancia2;
+  }
+
   public Raio refletido(){
 
     Raio refletido = new Raio(profundidade+1);

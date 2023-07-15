@@ -53,5 +53,14 @@ public class Teste extends Cena{
     Fontes(
       new Fonte(-100, 140, -20).setCor(0.5f,0.5f,0.5f)
     );
+
+    FontesExtensas(
+
+      new Extensa(
+            new Esfera(0, 100, 50)
+            .setRaio(50)
+      )
+
+    );
   }
 }
