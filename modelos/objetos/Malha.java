@@ -11,8 +11,10 @@ public abstract class Malha extends Conjunto{
   ArrayList<int[]>   LF = new ArrayList<>();
 
   public Malha construir(){
+    int i = 0;
     for(int[] face : LF){
       componentes.add(gerarTriangulo(face));
+      System.out.println(i++);
     }
     return this;
   }
@@ -31,9 +33,12 @@ public abstract class Malha extends Conjunto{
   }
 
   void addNormal(Triangulo triangulo){
-    Objeto tronco = new Cilindro(triangulo.P1.valores)
+
+    Vetor centro = triangulo.P1.mais(triangulo.P2).mais(triangulo.P3).vezes(1/3);
+
+    Objeto tronco = new Cilindro(centro.valores)
                           .setRaio(5)
-                          .setTopo(triangulo.n.vezes(20).valores)
+                          .setTopo(centro.mais(triangulo.n.vezes(20)).valores)
                           .construir()
                           .setKe(0.824, 0.706, 0.549)
                           .setKd(0.824, 0.706, 0.549)

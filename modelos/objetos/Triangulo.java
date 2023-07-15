@@ -59,14 +59,16 @@ public class Triangulo extends Plano{
   }
 
 
-  public boolean inside(Vetor centro, double tamanho){
+  public Esfera BoundingBox(){
 
-    tamanho *= 1.73;
-    
-    if(P1.menos(centro).modulo() < tamanho) return true;
-    if(P2.menos(centro).modulo() < tamanho) return true;
-    if(P3.menos(centro).modulo() < tamanho) return true;
-    
-    return false;
+    Vetor centro = P1.mais(P2).mais(P3).vezes(1/3);
+
+    double d1 = P1.menos(centro).modulo();
+    double d2 = P2.menos(centro).modulo();
+    double d3 = P3.menos(centro).modulo();
+
+    double raio = (d1 > d2)? d1 : (d2 > d3)? d2 : d3;
+
+    return new Esfera(centro.valores).setRaio(raio);
   }
 }

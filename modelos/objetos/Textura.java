@@ -41,6 +41,10 @@ public abstract class Textura<Prop extends Objeto> extends Objeto{
     return ponto;
   }
 
+  // public Esfera BoundingBox(){
+  //   return objeto.BoundingBox();
+  // }
+
   public Vetor getKd(Vetor pi){
     return objeto.getKd(pi).mult(mapear(pi));
   }

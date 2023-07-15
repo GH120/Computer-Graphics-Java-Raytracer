@@ -37,7 +37,8 @@ public class Esfera extends ObjetoSimples{
     return pi.menos(centro).unitario();
   }
 
-  public boolean inside(Vetor centroCubo, double tamanho){
-    return centroCubo.menos(this.centro).modulo() < 1.73*(tamanho + raio);
+  public Esfera BoundingBox(){
+    return this;
   }
+
 }

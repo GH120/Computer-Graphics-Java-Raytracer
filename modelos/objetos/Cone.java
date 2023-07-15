@@ -81,10 +81,15 @@ public class Cone extends Composto{
     return n.vezes(-1);
   }
 
-  public boolean inside(Vetor centro, double tamanho){
+  public Esfera BoundingBox(){
     //Raio da esfera que contém o cone
-    Vetor R = dir.vezes((altura*altura+raio*raio)/(2*altura));
-    
-    return vertice.menos(R).menos(centro).modulo() < 1.73*tamanho + R.modulo();
+
+    double raioEsfera = (altura*altura+raio*raio)/(2*altura);
+
+    Vetor R = dir.vezes(raio);
+
+    Vetor centroEsfera = vertice.menos(R);
+
+    return new Esfera(centroEsfera.valores).setRaio(raioEsfera);
   }
 }

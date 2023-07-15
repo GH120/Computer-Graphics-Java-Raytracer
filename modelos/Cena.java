@@ -46,5 +46,16 @@ public abstract class Cena{
     L_ambiente = new Vetor(rgb);
     return this;
   }
+
+  //Lógica basicamente a seguinte:
+  //1.0 - Extrai todos os objetos simples 
+  //1.1 - Pega a bounding sphere deles e adiciona a uma lista
+  //2.0 - Pega as bounding spheres mais proximas entre si, formando grupos de 3 ou mais => Heap
+  //2.1 - Aplica o algoritmo do ritter para 3 ou mais bounding spheres
+  //2.2 - O algoritmo funciona pegando os 6 pontos extremos x,y,z positivos e negativos de cada esfera
+  //2.3 - Vamos usar o miniball calculator em java já usado, assim, só precisamos colocar esses pontos
+  Conjunto BoundingVolumeTree(){
+    return new Conjunto();
+  }
   
 }
