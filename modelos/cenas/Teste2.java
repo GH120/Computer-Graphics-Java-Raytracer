@@ -17,6 +17,7 @@ public class Teste2 extends Cena{
             .setKa(0.5,0.8,0.2)
             .setKd(0.5,0.8,0.2)
             .aplicar(
+                new Escala(3,3,3),
                 new Translacao(-20,-150,-185)
             )
             ,

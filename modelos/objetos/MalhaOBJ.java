@@ -42,23 +42,42 @@ public class MalhaOBJ extends Malha {
                 int v2 = parseIndex(parts[2].split("/")[0]);
                 int v3 = parseIndex(parts[3].split("/")[0]);
                 
-                int index = LA.size();
-                
-                //Adiciona arestas com esses vértices
-                addAresta(v1,v2).addAresta(v2,v3).addAresta(v3,v1);
-                
                 //Adiciona a face relacionada as últimas arestas adicionadas
-                addFace(index, index+1, index+2);
+                addFace(v1, v2, v3);
 
                 System.out.println("v1: " + v1 + " v2: " + v2 + " v3: " + v3);
+
+                //Se for uma malha de quadrilateros
+                if(parts.length == 5){
+                    int v4 = parseIndex(parts[4].split("/")[0]);
+                    
+                    addFace(v1, v2, v4);
+                }
             }
         }
         reader.close();
     }
-
+ 
+    //Provavelmente o erro está aqui
     private int parseIndex(String indexString) {
         int index = Integer.parseInt(indexString);
-        return (index >= 0) ? index - 1 : LV.size() + index;
+        return (index >= 0) ? index : LV.size() + index ;
+    }
+
+    //Nesse caso, construimos a face com os vértices ao invés das arestas
+    Triangulo gerarTriangulo(int[] face){
+
+        int v1,v2,v3;
+
+        v1 = face[0];
+        v2 = face[1];
+        v3 = face[2];
+    
+        double[] p1 = LV.get(v1).eixos();
+        double[] p2 = LV.get(v2).eixos();
+        double[] p3 = LV.get(v3).eixos();
+    
+        return new Triangulo(p1).setP2(p2).setP3(p3);
     }
 }
 
