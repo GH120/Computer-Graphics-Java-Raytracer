@@ -30,6 +30,8 @@ public class Difusa extends Superficie{
 
         Vetor direcaoReal = toWorld.vezes(direcao.quatroD()).tresD().unitario();
 
+        // direcaoReal.printar();
+
         Raio refletido = raio.refletido();
 
         refletido.origem      = ponto.pos.mais(direcaoReal);
