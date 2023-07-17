@@ -39,7 +39,7 @@ public class Pathtracer extends Raytracer {
     Ponto ponto = cena.objetos.colisao(raio.origem, raio.direcao);
 
     if (ponto == null)
-      return cena.background;
+      return cena.background.mult(raio.intensidade);
 
     if( raio.interno) 
       ponto.normal = ponto.normal.vezes(-1);
@@ -53,7 +53,7 @@ public class Pathtracer extends Raytracer {
     }
     
     Vetor luz = iluminar(ponto, raio.direcao);
-    
+
     return luz.mult(raio.intensidade);
   }
 

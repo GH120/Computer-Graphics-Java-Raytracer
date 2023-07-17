@@ -8,8 +8,6 @@ import modelos.reflexoes.*;
 import java.util.*;
 import modelos.objetos.*;
 
-import java.util.ArrayList;
-
 class Main {
 
   static int CAMERA_PERSPECTIVA = 1;
@@ -19,7 +17,7 @@ class Main {
 
     rodarPrograma(
               new modelos.cenas.Teste(),                //Cena escolhida
-              new Pathtracer(1),       //Raytracer escolhido
+              new Sampletracer(new Pathtracer(1), 100),                  //Raytracer escolhido
               700, 700,                    //Resolução
               CAMERA_PERSPECTIVA                        //Câmera da cena escolhida
       );
@@ -46,50 +44,50 @@ class Main {
 }
 
 
-class Teste{
+// class Teste{
 
-  Cena cena =  new modelos.cenas.Teste();
-  Ponto P1 = new Ponto(null, new Vetor(0,50*Math.sqrt(2), -200 + 50*Math.sqrt(2)), null);
-  Ponto P2 = new Ponto(null, new Vetor(0,0, -300), null);
+//   Cena cena =  new modelos.cenas.Teste();
+//   Ponto P1 = new Ponto(null, new Vetor(0,50*Math.sqrt(2), -200 + 50*Math.sqrt(2)), null);
+//   Ponto P2 = new Ponto(null, new Vetor(0,0, -300), null);
 
-  Teste(){
+//   Teste(){
 
-      List<Raio> raios = new ArrayList<Raio>(); //Pilha de raios, pra conseguir usar na reflexão da superficie
+//       List<Raio> raios = new ArrayList<Raio>(); //Pilha de raios, pra conseguir usar na reflexão da superficie
 
-      Raio raio    = new Raio();
-      raio.origem  = new Vetor(0,50*Math.sqrt(2),0);
-      raio.direcao = new Vetor(0,0,-1);
-      raio.intensidade = new Vetor(1,1,1);
+//       Raio raio    = new Raio();
+//       raio.origem  = new Vetor(0,50*Math.sqrt(2),0);
+//       raio.direcao = new Vetor(0,0,-1);
+//       raio.intensidade = new Vetor(1,1,1);
 
-      raio.origem.printar();
-      raio.direcao.printar();
+//       raio.origem.printar();
+//       raio.direcao.printar();
 
-      Ponto colidido = cena.objetos.colisao(raio.origem, raio.direcao);
+//       Ponto colidido = cena.objetos.colisao(raio.origem, raio.direcao);
 
-      colidido.printar(); // Teste do P1, tem que ser igual
+//       colidido.printar(); // Teste do P1, tem que ser igual
 
-      Superficie refratora = colidido.objeto.superficie; //Pego a superficie do objeto
+//       Superficie refratora = colidido.objeto.superficie; //Pego a superficie do objeto
 
-      refratora.refletir(colidido, raio, raios); //Raio refratado adicionado a pilha de raios
+//       refratora.refletir(colidido, raio, raios); //Raio refratado adicionado a pilha de raios
 
-      System.out.println(Arrays.toString(raios.toArray()));
+//       System.out.println(Arrays.toString(raios.toArray()));
 
-      Raio refratado = raios.get(0); //Pega o raio adicionado na pilha pela ultima reflexão
+//       Raio refratado = raios.get(0); //Pega o raio adicionado na pilha pela ultima reflexão
 
-      System.out.println("raio refratado");
-      refratado.printar();
+//       System.out.println("raio refratado");
+//       refratado.printar();
 
-      Ponto colididoDentro = cena.objetos.colisao(refratado.origem, refratado.direcao); //Ponto obtido da colisão
+//       Ponto colididoDentro = cena.objetos.colisao(refratado.origem, refratado.direcao); //Ponto obtido da colisão
 
-      colididoDentro.printar();
+//       colididoDentro.printar();
 
-      refratora.refletir(colididoDentro, refratado, raios); //Raio refratado adicionado a pilha de raios
-      System.out.println("colisão 2");
-      Raio refratado2 = raios.get(1); //Pega o raio adicionado na pilha pela ultima reflexão
+//       refratora.refletir(colididoDentro, refratado, raios); //Raio refratado adicionado a pilha de raios
+//       System.out.println("colisão 2");
+//       Raio refratado2 = raios.get(1); //Pega o raio adicionado na pilha pela ultima reflexão
 
-      refratado2.printar();
+//       refratado2.printar();
 
-      cena.objetos.colisao(refratado2.origem, refratado2.direcao).printar();
+//       cena.objetos.colisao(refratado2.origem, refratado2.direcao).printar();
 
-  }
-}
+//   }
+// }

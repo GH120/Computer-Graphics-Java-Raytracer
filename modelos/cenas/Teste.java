@@ -16,7 +16,7 @@ public class Teste extends Cena{
             .setKe(1,1,1)
             .setKd(1,1,1)
             .setKa(1,1,1)
-                    // .addReflection(new Difusa())
+                    .addReflection(new Difusa())
             ,
 
             new Plano(2000,-1500,-4000)
@@ -44,7 +44,7 @@ public class Teste extends Cena{
                            .setKa(1,1,1)
                            .setKe(1.0, 1.0, 1.0),
                     "images.jpeg")
-            .setEscala(10)
+            .setEscala(10)//.addReflection(new Difusa())
             // .addReflection(new Especular())
     );
 

@@ -30,7 +30,7 @@ public class Raycaster extends Raytracer{
 
     Ponto ponto = cena.objetos.colisao(raio.origem, raio.direcao);
     
-    if(ponto == null) return cena.background;
+    if(ponto == null) return cena.background.mult(raio.intensidade);
 
     Vetor luz = iluminar(ponto, raio.direcao);
 

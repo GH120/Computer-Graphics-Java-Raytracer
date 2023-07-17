@@ -10,6 +10,14 @@ import algebra.*;
 public class Difusa extends Superficie{
 
     Random rand = new Random();
+
+    public Difusa(){
+        eficiencia = 1;
+    }
+
+    public Difusa(double eficiencia){
+        this.eficiencia = eficiencia;
+    }
     
     public void refletir(Ponto ponto, Raio raio, List<Raio> raios){
 
@@ -22,22 +30,23 @@ public class Difusa extends Superficie{
 
         Vetor direcao = new Vetor(x,y,z);
 
-        Vetor normal  = ponto.normal.vezes(-1);
+        Vetor normal  = ponto.normal;
         Vetor direita = normal.ortogonal();
-        Vetor frente  = direita.ortogonal();
+        Vetor frente  = normal.vetorial(direita); //vetorial é ortogonal as duas
 
         Matriz toWorld = new Matriz(direita,normal, frente, new Vetor(0,0,0,0)).transposta();
 
         Vetor direcaoReal = toWorld.vezes(direcao.quatroD()).tresD().unitario();
 
-        // direcaoReal.printar();
-
         Raio refletido = raio.refletido();
+        
+        //O quanto ele desviou da normal
+        double atenuacao = eficiencia * direcaoReal.escalar(normal);
 
         refletido.origem      = ponto.pos.mais(direcaoReal);
         refletido.direcao     = direcaoReal; 
-        refletido.intensidade = ponto.getKd().mult(raio.intensidade);
-        
+        refletido.intensidade = ponto.getKd().mult(raio.intensidade).vezes(atenuacao);
+
         raios.add(refletido);
     }
 }
