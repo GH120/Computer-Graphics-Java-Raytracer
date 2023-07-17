@@ -22,6 +22,8 @@ public class Fonte{
     
     Vetor l = ponto.pos.menos(posicao).unitario();
 
+    if(l.escalar(n) > 0) return new Vetor(0,0,0);
+
     Vetor Ieye = difusa(n,l,ponto.getKd()).mais(especular(n,v,l,ponto.getKe()));
 
     return Ieye;

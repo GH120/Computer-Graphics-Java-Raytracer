@@ -1,5 +1,6 @@
 import modelos.*;
 import modelos.cenas.*;
+import modelos.cenas.Teste;
 import modelos.raytracers.*;
 import programa.Programa;
 import algebra.*;
@@ -17,8 +18,8 @@ class Main {
   public static void main(String[] args) {
 
     rodarPrograma(
-              new Teste2(),                //Cena escolhida
-              new ConcurrentRaytracer(new Pathtracer(2)),       //Raytracer escolhido
+              new modelos.cenas.Teste(),                //Cena escolhida
+              new ConcurrentRaytracer(new Pathtracer(0)),       //Raytracer escolhido
               700, 700,                    //Resolução
               CAMERA_PERSPECTIVA                        //Câmera da cena escolhida
       );
