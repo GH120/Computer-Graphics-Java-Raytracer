@@ -2,13 +2,15 @@ package modelos.objetos;
 import java.util.ArrayList;
 
 import algebra.*;
+import miniball.Miniball;
+import miniball.PointSet;
 import modelos.*;
 
 public abstract class Malha extends Conjunto{
   
-  ArrayList<Vetor>   LV = new ArrayList<>();
-  ArrayList<int[]>   LA = new ArrayList<>();
-  ArrayList<int[]>   LF = new ArrayList<>();
+  public ArrayList<Vetor>   LV = new ArrayList<>();
+  public ArrayList<int[]>   LA = new ArrayList<>();
+  public ArrayList<int[]>   LF = new ArrayList<>();
 
   public Malha construir(){
     int i = 0;
@@ -107,6 +109,31 @@ public abstract class Malha extends Conjunto{
     setKa(1,1,1);
 
     return this;
+  }
+
+  public Conjunto BoundingVolume(){
+    
+    var vertices = new PointSet(){
+
+      public int dimension(){
+        return 3;
+      }
+
+      public int size(){
+        return LV.size();
+      }
+
+      public double coord(int i, int j) {
+        return LV.get(i).get(j);
+      }
+    };
+
+    Miniball BoundingSphere = new Miniball(vertices);
+
+    Esfera esfera = new Esfera(BoundingSphere.center())
+                      .setRaio(BoundingSphere.radius());
+
+    return new Conjunto(this).setFronteira(esfera);
   }
 
 }

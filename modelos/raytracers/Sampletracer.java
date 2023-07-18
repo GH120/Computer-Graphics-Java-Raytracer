@@ -40,6 +40,8 @@ public class Sampletracer extends Raytracer{
             raytracer.raios = raios;
 
             raytracer.calcularRaios();
+
+            System.out.println((((double) i)/pixelCount*100) + "% terminado");
         }
     }
 

@@ -16,35 +16,13 @@ class Main {
   
   public static void main(String[] args) {
 
-    ArrayList<Vetor> pontos = new ArrayList<>();
 
-    pontos.add(new Vetor(0,0,-2));
-    pontos.add(new Vetor(0,0,1));
-    pontos.add(new Vetor(1,0,0));
-
-    var ponto = new PointSet(){
-
-      public int dimension(){
-        return pontos.get(0).size();
-      }
-
-      public int size(){
-        return pontos.size();
-      }
-
-      public double coord(int i, int j) {
-        return pontos.get(i).get(j);
-      }
-    };
-
-    System.out.println(Arrays.toString(new Miniball(ponto).center()));
-
-    // rodarPrograma(
-    //           new Teste(),                //Cena escolhida
-    //           new Sampletracer(new ConcurrentRaytracer(new Pathtracer(1)), 200),                  //Raytracer escolhido
-    //           700, 700,                    //Resolução
-    //           CAMERA_PERSPECTIVA                        //Câmera da cena escolhida
-    //   );
+    rodarPrograma(
+              new Teste2(),                //Cena escolhida
+              new Sampletracer(new ConcurrentRaytracer(new Pathtracer(1)), 10),                  //Raytracer escolhido
+              700, 700,                    //Resolução
+              CAMERA_PERSPECTIVA                        //Câmera da cena escolhida
+      );
 
       // new Teste();
 
