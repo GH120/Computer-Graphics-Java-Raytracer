@@ -13,6 +13,7 @@ public class Cone extends Composto{
   }
 
   //Seta as propriedades dos componentes do objeto composto
+  //Ele é um objeto composto do círculo inferior e contorno do cone
   public Cone construir(){
     inferior = new Circulo(base.valores);
     inferior.setNormal(dir.vezes(-1).valores);
@@ -23,6 +24,7 @@ public class Cone extends Composto{
   }
 
 
+  //Contorno do cilindro, um objeto simples que exclui o círculo inferior
   Objeto getContorno(){
     
     return new ObjetoSimples() {
@@ -47,6 +49,18 @@ public class Cone extends Composto{
       
           return getPonto(ponto, normal(ponto));
           
+        }
+
+        public Esfera BoundingBox(){
+          //Raio da esfera que contém o cone
+
+          double raioEsfera = (altura*altura+raio*raio)/(2*altura);
+
+          Vetor R = dir.vezes(raio);
+
+          Vetor centroEsfera = vertice.menos(R);
+
+          return new Esfera(centroEsfera.valores).setRaio(raioEsfera);
         }
     };
   }
@@ -79,17 +93,5 @@ public class Cone extends Composto{
     Vetor n = diferenca.vetorial(N).unitario();
 
     return n.vezes(-1);
-  }
-
-  public Esfera BoundingBox(){
-    //Raio da esfera que contém o cone
-
-    double raioEsfera = (altura*altura+raio*raio)/(2*altura);
-
-    Vetor R = dir.vezes(raio);
-
-    Vetor centroEsfera = vertice.menos(R);
-
-    return new Esfera(centroEsfera.valores).setRaio(raioEsfera);
   }
 }

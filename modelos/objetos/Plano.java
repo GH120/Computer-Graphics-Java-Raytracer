@@ -34,4 +34,8 @@ public class Plano extends ObjetoSimples {
   public boolean inside(Vetor centro, double tamanho){
     return P1.menos(centro).escalar(n) < tamanho;
   }
+
+  public Esfera BoundingBox(){
+    return null;
+  }
 }

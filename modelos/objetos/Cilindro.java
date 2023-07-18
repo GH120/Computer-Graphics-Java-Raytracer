@@ -15,6 +15,7 @@ public class Cilindro extends Cone{
     this.base = new Vetor(eixos);
   }
 
+  //Ele é um objeto composto de círculos inferior e superior, além do contorno do cilíndro
   public Cilindro construir(){
     
     inferior = new Circulo(base.valores);
@@ -32,6 +33,7 @@ public class Cilindro extends Cone{
     return this;
   }
 
+  //Contorno do Cilindro, um objeto simples que exclui os círculos inferior e superior
   public Objeto getContorno(){
     
     return new ObjetoSimples(){ 
@@ -57,6 +59,18 @@ public class Cilindro extends Cone{
         if(height > altura || height < 0) return null;
     
         return getPonto(pi , normal(pi)); 
+      }
+
+      public Esfera BoundingBox(){
+        //Raio da esfera que contém o cone
+
+        double raioEsfera = (altura*altura+raio*raio)/(2*altura);
+
+        Vetor R = dir.vezes(raio);
+
+        Vetor centroEsfera = vertice.menos(R);
+
+        return new Esfera(centroEsfera.valores).setRaio(raioEsfera);
       }
     };
   }

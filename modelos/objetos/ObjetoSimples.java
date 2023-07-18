@@ -55,4 +55,6 @@ public abstract class ObjetoSimples extends Objeto{
     return p0.mais(dr.vezes(t));
   }
   
+
+  abstract public Esfera BoundingBox();
 }
