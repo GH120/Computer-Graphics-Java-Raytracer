@@ -49,9 +49,11 @@ public class MalhaOBJ extends Malha {
 
                 //Se for uma malha de quadrilateros
                 if(parts.length == 5){
+
                     int v4 = parseIndex(parts[4].split("/")[0]);
                     
-                    addFace(v1, v2, v4);
+                    addFace(v1, v3, v4);
+
                 }
             }
         }
