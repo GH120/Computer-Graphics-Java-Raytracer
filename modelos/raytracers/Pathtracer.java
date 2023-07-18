@@ -54,7 +54,11 @@ public class Pathtracer extends Raytracer {
     
     Vetor luz = iluminar(ponto, raio.direcao);
 
-    return luz.mult(raio.intensidade);
+    // if(raio.profundidade > 0) return luz;
+
+    luz  = luz.mult(raio.intensidade);
+
+    return luz;
   }
 
   public void gerarRaios() {

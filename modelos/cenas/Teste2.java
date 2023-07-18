@@ -19,7 +19,7 @@ public class Teste2 extends Cena{
             .aplicar(
                 new Escala(3,3,3),
                 new Translacao(-20,-150,-185)
-            )
+            ).addReflection(new Difusa())
             ,
 
             // new Plano(2000,-1500,-4000)
@@ -48,7 +48,6 @@ public class Teste2 extends Cena{
                            .setKe(1.0, 1.0, 1.0),
                     "images.jpeg")
             .setEscala(10)
-            .addReflection(new Especular())
     );
 
     background = new Vetor(0.1,0.1,0.1);

@@ -129,13 +129,11 @@ public class Vetor{
 
     Vetor a = new Vetor(1, 0, 0);
 
-    if (a.escalar(this) == 1) {
+    double sentido = a.escalar(this.unitario());
+
+    if (sentido == 1 || sentido == -1) {
         a = new Vetor(0, 1, 0);
     }
-
-    if(a.escalar(this) == -1 ){
-        a = new Vetor(0, -1, 0);
-    } 
 
     Vetor n = vetorial(a).unitario();
 

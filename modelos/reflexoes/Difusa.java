@@ -48,6 +48,12 @@ public class Difusa extends Superficie{
         // direcaoReal.printar();
         
         //O quanto ele desviou da normal
+        if(Double.isNaN(direcaoReal.escalar(normal))){
+            normal.printar();
+            direita.printar();
+            frente.printar();
+            System.exit(0);
+        }
         double atenuacao = eficiencia * direcaoReal.escalar(normal);
 
         refletido.origem      = ponto.pos.mais(direcaoReal);

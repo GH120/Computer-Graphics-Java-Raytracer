@@ -26,7 +26,7 @@ public class Fonte{
 
     Vetor Ieye = difusa(n,l,ponto.getKd()).mais(especular(n,v,l,ponto.getKe()));
 
-    // if(Ieye.valores[0] < 0) Ieye.printar();
+    // if(Ieye.valores[1] < 0) Ieye.printar();
 
     // Ieye.printar();
 
