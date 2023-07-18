@@ -23,13 +23,13 @@ public class Teste extends Cena{
             .setNormal(0,0,1)
             .setKd(0, 0, 1)
             .setKa(0, 0, 1)
-            .setKe(0, 0, 1),
+            .setKe(0, 0, 1).addReflection(new Difusa()),
 
             new Plano(2000,-1500,0)
             .setNormal(-1,0,0)
             .setKd(0, 1, 0)
             .setKa(0, 1, 0)
-            .setKe(0, 1, 0),
+            .setKe(0, 1, 0).addReflection(new Difusa()),
 
             new Plano(-2000,-1500,0)
             .setNormal(1,0,0)

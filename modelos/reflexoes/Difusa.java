@@ -39,13 +39,20 @@ public class Difusa extends Superficie{
         Vetor direcaoReal = toWorld.vezes(direcao.quatroD()).tresD().unitario();
 
         Raio refletido = raio.refletido();
+
+        // System.out.println("ponto");
+        // ponto.printar();
+        // System.out.println("incidente");
+        // raio.direcao.printar();
+        // System.out.println("refletido");
+        // direcaoReal.printar();
         
         //O quanto ele desviou da normal
         double atenuacao = eficiencia * direcaoReal.escalar(normal);
 
         refletido.origem      = ponto.pos.mais(direcaoReal);
         refletido.direcao     = direcaoReal; 
-        refletido.intensidade = ponto.getKd().mult(raio.intensidade).vezes(atenuacao);
+        refletido.intensidade = raio.intensidade.vezes(atenuacao);
 
         raios.add(refletido);
     }

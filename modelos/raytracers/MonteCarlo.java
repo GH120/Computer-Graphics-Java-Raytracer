@@ -7,7 +7,9 @@ import modelos.*;
 import modelos.fontes.*;
 import modelos.reflexoes.Superficie;
 
-//Com iluminação global
+//Com iluminação global => DEPRECATED
+//Refazer quase tudo, na verdade, basta fazer o sampling das fontes extensas
+//Basicamente, atirar vários raios e ver quais acertam a fonte extensa, transformar esses pontos em fontes pontuais direcionais e adicionar a cena
 public class MonteCarlo {
 
     int depth = 3;
