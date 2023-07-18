@@ -10,7 +10,7 @@ import modelos.*;
 public abstract class Textura<Prop extends Objeto> extends Objeto{
 
   public String path;
-  Prop objeto;
+  public Prop objeto;
   BufferedImage imagem;
 
   abstract Vetor mapear(Vetor pi);
