@@ -150,7 +150,7 @@ public class Programa {
         .setDimensoes(80, 80)
         .setCoordenadas(
             new Vetor(0, 0, 0),
-            new Vetor(0, 0, 30),
+            new Vetor(0, 0, -30),
             new Vetor(0, 1, 0)));
 
   }

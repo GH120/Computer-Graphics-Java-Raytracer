@@ -3,7 +3,7 @@ import algebra.*;
 import modelos.Ponto;
 
 public class Plano extends ObjetoSimples {
-  Vetor P1;
+  public Vetor P1;
   Vetor n;
   
   public Plano (double...eixos){

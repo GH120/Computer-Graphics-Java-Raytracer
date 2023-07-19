@@ -22,9 +22,9 @@ public class Camera extends Movable{
     this.LookAt = LookAt;
     this.Up     = Up;
 
-    Vetor direcao = Eye.menos(LookAt).unitario().quatroD();
+    Vetor direcao = LookAt.menos(Eye).unitario().quatroD();
     
-    Vetor cima = Up.menos(Eye).unitario().quatroD();
+    Vetor cima    = Up.menos(Eye).unitario().quatroD();
     
     Vetor direita = cima.vetorial(direcao).unitario().quatroD();
 

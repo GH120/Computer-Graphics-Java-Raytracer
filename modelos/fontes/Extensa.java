@@ -1,36 +1,72 @@
 package modelos.fontes;
 
+import java.util.Random;
+
 import algebra.*;
 import modelos.*;
+import modelos.objetos.Conjunto;
+import modelos.objetos.Triangulo;
 
 public class Extensa extends Fonte {
     
-    Objeto geometria;
+    private Random    rand = new Random();
+    public  Objeto    geometria;
+    public  Triangulo T1, T2;
+    public  double    samples;
 
-    public Extensa(Objeto geometria){
-        this.geometria = geometria;
+    public Extensa(Vetor p1, Vetor p2, Vetor p3, Vetor p4){
+
+        If = new Vetor(1,1,1);
+
+        samples = 10;
+        
+        T1 = new Triangulo(p1.valores).setP2(p2.valores).setP3(p3.valores);
+
+        T2 = new Triangulo(p1.valores).setP2(p3.valores).setP3(p4.valores);
+
+        geometria = new Conjunto(T1, T2);
+
     }
 
-    //Ao invés da luz lançar um raio para o ponto visualizado
-    //O raytracer vai lançar varios raios e ver qual acerta a luz
-    //Ele vai pegar o ponto que o raio acerta essa fonte luminosa extensa,
-    //Levar em conta o desvio que custa eficiencia da luz, além da intensidade do raio
-    //A intensidade resultante é a contribuida para o resultado final
-    public Vetor luz(Ponto colidido, Raio raio){
-
-        Vetor normal = colidido.normal;
-
-        double desvio = Math.abs(normal.escalar(raio.direcao));
-
-        Vetor eficiencia = raio.intensidade.vezes(desvio);
-
-        //A luminosidade original de uma fonte pontual 
-        // Vetor l = raio.direcao.vezes(-1).unitario();
-        // Vetor n = origem.normal;
-        // Vetor luminosidade = super.luz(origem, viewer);
-
-        return raio.intensidade.mult(eficiencia);
+    Extensa setSamples(int samples){
+        this.samples = samples;
+        return this;
     }
+
+    public Fonte sample(){
+
+        double t1,t2,t3,t4, sum;
+
+        t1 = rand.nextDouble();
+        t2 = rand.nextDouble();
+        t3 = rand.nextDouble();
+        t4 = rand.nextDouble();
+
+        sum = t1+t2+t3+t4;
+
+        t1 /= sum;
+        t2 /= sum;
+        t3 /= sum;
+        t4 /= sum;
+
+        Vetor posicao = T1.P1.vezes(t1)
+                             .mais(T1.P2.vezes(t2))
+                             .mais(T1.P3.vezes(t3))
+                             .mais(T2.P3.vezes(t4));
+        
+        Fonte pontual = new Fonte(posicao.valores)
+                            .setCor(If.vezes(1/samples).valores);
+
+        return pontual;
+    }
+
+    public Vetor luz(Raio raio, Ponto ponto){
+
+        if(ponto.normal.escalar(raio.direcao) < 0) System.out.println("erro");
+        return raio.intensidade.mult(If).vezes(ponto.normal.escalar(raio.direcao));
+    }
+    //Photon mapping
+    //Colisão
 
     public Ponto colisao(Raio raio){
         return geometria.colisao(raio.origem, raio.direcao);

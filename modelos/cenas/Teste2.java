@@ -13,6 +13,7 @@ public class Teste2 extends Cena{
 
             new MalhaOBJ("mesa.obj")
             .construir()
+            .BoundingVolume()
             .setKe(0.5,0.8,0.2)
             .setKa(0.5,0.8,0.2)
             .setKd(0.5,0.8,0.2)
@@ -58,10 +59,12 @@ public class Teste2 extends Cena{
 
     FontesExtensas(
 
-      new Extensa(
-            new Esfera(0, 100, 50)
-            .setRaio(50)
-      )
+    new Extensa(
+      new Vetor(0,100,0),
+      new Vetor(100,100,0),
+      new Vetor(100, 100, -100),
+      new Vetor(0,100, -100)
+)
 
     );
   }

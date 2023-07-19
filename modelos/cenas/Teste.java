@@ -44,7 +44,7 @@ public class Teste extends Cena{
                            .setKa(1,1,1)
                            .setKe(1.0, 1.0, 1.0),
                     "images.jpeg")
-            .setEscala(10)//.addReflection(new Difusa())
+            .setEscala(10).addReflection(new Difusa())
             // .addReflection(new Especular())
     );
 
@@ -57,8 +57,10 @@ public class Teste extends Cena{
     FontesExtensas(
 
       new Extensa(
-            new Esfera(0, 100, 50)
-            .setRaio(50)
+            new Vetor(0,1000,0),
+            new Vetor(100,1000,0),
+            new Vetor(100, 1000, -100),
+            new Vetor(0,1000, -100)
       )
 
     );

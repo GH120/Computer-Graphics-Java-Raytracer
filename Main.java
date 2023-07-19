@@ -1,5 +1,6 @@
 import modelos.*;
 import modelos.cenas.*;
+import modelos.fontes.Extensa;
 import modelos.raytracers.*;
 import programa.Programa;
 import algebra.*;
@@ -16,10 +17,12 @@ class Main {
   
   public static void main(String[] args) {
 
+    // for(int i=0; i < extensa.samples; i++) extensa.sample().posicao.printar();
+
 
     rodarPrograma(
-              new Teste2(),                //Cena escolhida
-              new Sampletracer(new ConcurrentRaytracer(new Pathtracer(1)), 10),                  //Raytracer escolhido
+              new Teste(),                //Cena escolhida
+              new Sampletracer(new ConcurrentRaytracer(new GIluminationTracer()), 10),                  //Raytracer escolhido
               700, 700,                    //Resolução
               CAMERA_PERSPECTIVA                        //Câmera da cena escolhida
       );

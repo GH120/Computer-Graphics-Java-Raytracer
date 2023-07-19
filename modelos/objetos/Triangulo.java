@@ -4,7 +4,9 @@ import modelos.*;
 
 public class Triangulo extends Plano{
 
-  Vetor P2, P3;
+  public Vetor P2;
+
+public Vetor P3;
 
   Vetor r1, r2;
 

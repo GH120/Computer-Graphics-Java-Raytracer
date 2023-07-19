@@ -111,7 +111,7 @@ public abstract class Malha extends Conjunto{
     return this;
   }
 
-  public Conjunto BoundingVolume(){
+  public Objeto BoundingVolume(){
     
     var vertices = new PointSet(){
 
@@ -133,7 +133,7 @@ public abstract class Malha extends Conjunto{
     Esfera esfera = new Esfera(BoundingSphere.center())
                       .setRaio(BoundingSphere.radius());
 
-    return new Conjunto(this).setFronteira(esfera);
+    return esfera;
   }
 
 }
