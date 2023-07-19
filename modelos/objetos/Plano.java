@@ -4,7 +4,7 @@ import modelos.Ponto;
 
 public class Plano extends ObjetoSimples {
   public Vetor P1;
-  Vetor n;
+  public Vetor n;
   
   public Plano (double...eixos){
     P1 = new Vetor(eixos); //Transformar de volta em centro

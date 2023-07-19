@@ -79,4 +79,8 @@ public abstract class Raytracer{
       return this;
   }
 
+  public void setRaios(LinkedList<Raio> raios){
+    this.raios = raios;
+  }
+
 }

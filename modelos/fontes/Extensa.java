@@ -60,11 +60,6 @@ public class Extensa extends Fonte {
         return pontual;
     }
 
-    public Vetor luz(Raio raio, Ponto ponto){
-
-        if(ponto.normal.escalar(raio.direcao) < 0) System.out.println("erro");
-        return raio.intensidade.mult(If).vezes(ponto.normal.escalar(raio.direcao));
-    }
     //Photon mapping
     //Colisão
 

@@ -37,7 +37,7 @@ public class Sampletracer extends Raytracer{
 
             gerarRaios();
 
-            raytracer.raios = raios;
+            raytracer.setRaios(raios);
 
             raytracer.calcularRaios();
 

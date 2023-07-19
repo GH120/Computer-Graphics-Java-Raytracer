@@ -2,6 +2,7 @@ package modelos.raytracers;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 import algebra.*;
 import modelos.*;
@@ -13,10 +14,7 @@ import modelos.reflexoes.Superficie;
 //Basicamente, atirar vários raios e ver quais acertam a fonte extensa, transformar esses pontos em fontes pontuais direcionais e adicionar a cena
 public class GIluminationTracer extends Raytracer{
 
-    int depth = 1;
-    int numberSamples = 10;
-    int colisionCount = 1;
-    LinkedList<Raio> samples = new LinkedList<Raio>();
+    int depth = 2;
 
     //CalcularSamplesDaLuz => pega as luzes da cena e calcula samples delas
     //Com esses samples, vamos ter pontos onde temos certeza que a luz incide
@@ -60,7 +58,7 @@ public class GIluminationTracer extends Raytracer{
           Ponto colisaoFonteExtensa = fonte.colisao(raio);
 
           if(raio.pontoMaisProximo(colisaoFonteExtensa, ponto)){
-            return fonte.luz(raio, colisaoFonteExtensa);
+            return fonte.If.mult(raio.intensidade);
           }
         }
 
@@ -70,19 +68,18 @@ public class GIluminationTracer extends Raytracer{
         if( raio.interno) 
             ponto.normal = ponto.normal.vezes(-1);
     
-
         if(raio.profundidade < depth){
 
-            Superficie superficie = ponto.objeto.superficie;
-
-            //Mudar isso, refletir vai retornar um novo raio ao invés de diretamente adicionar a pilha
-            //Além disso, vai usar os samples da luz para decidir a direção principal de reflexão
-            if(superficie != null) superficie.refletir(ponto, raio, samples);
-
+          Superficie superficie = ponto.objeto.superficie;
+    
+          if(superficie != null) superficie.refletir(ponto, raio, pilha);
+    
         }
         
-        Vetor luz = iluminar(ponto, raio.direcao).mult(raio.intensidade);
-        
+        Vetor luz = iluminar(ponto, raio.direcao);
+    
+        luz  = luz.mult(raio.intensidade);
+    
         return luz;
     }
 
@@ -170,12 +167,45 @@ public class GIluminationTracer extends Raytracer{
         superficie.refletir(ponto, raio, pilha);
     }
 
+    private void photonMapping(){
+
+      Random rand = new Random();
+
+      ArrayList<Fonte> photons = new ArrayList<>();
+
+      double atenuacao = 0.5;
+
+      //APENAS FUNCIONA PARA VALORES DE Y NEGATIVOS, GENERALIZAR DEPOIS
+      for(Fonte fonte : cena.fontes){
+
+        Vetor direcao = new Vetor(2*rand.nextDouble() - 1, -rand.nextDouble(), 2*rand.nextDouble() - 1);
+
+        Ponto photonColision = cena.objetos.colisao(fonte.posicao, direcao);
+
+        if(photonColision == null) continue;
+
+        Fonte stickyPhoton = new Fonte(photonColision.pos.valores);
+
+        stickyPhoton.If = photonColision.getKd().mult(fonte.If).vezes(atenuacao);
+
+        photons.add(stickyPhoton);
+      }
+
+      for(Fonte photon : photons){
+        cena.fontes.add(photon);
+      }
+    }
+
     public Raytracer setCena(Cena cena){
 
-       for(Extensa fonte : cena.fontesExtensas)
+      super.setCena(cena);
+
+      for(Extensa fonte : cena.fontesExtensas)
           for(int i=0; i < fonte.samples; i++)
             cena.fontes.add(fonte.sample());
 
-       return super.setCena(cena);
+      photonMapping();
+
+      return this;
     }
 }

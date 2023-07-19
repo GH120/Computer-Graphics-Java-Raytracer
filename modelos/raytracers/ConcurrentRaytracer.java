@@ -147,5 +147,10 @@ public class ConcurrentRaytracer extends Raytracer{
         this.raytracer.setCamera(camera);
         return this;
     }
+
+    public void setRaios(LinkedList<Raio> raios){
+      this.raios = raios;
+      this.raytracer.raios = raios;
+    }
   
 }

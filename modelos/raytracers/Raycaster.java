@@ -81,5 +81,4 @@ public class Raycaster extends Raytracer{
 
     return raio;
   }
-
 }
