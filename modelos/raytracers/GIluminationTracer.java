@@ -14,7 +14,7 @@ import modelos.reflexoes.Superficie;
 //Basicamente, atirar vários raios e ver quais acertam a fonte extensa, transformar esses pontos em fontes pontuais direcionais e adicionar a cena
 public class GIluminationTracer extends Raytracer{
 
-    int depth = 2;
+    int depth = 10;
 
     //CalcularSamplesDaLuz => pega as luzes da cena e calcula samples delas
     //Com esses samples, vamos ter pontos onde temos certeza que a luz incide
@@ -63,7 +63,7 @@ public class GIluminationTracer extends Raytracer{
         }
 
         if (ponto == null)
-            return cena.background;
+            return cena.background.mult(raio.intensidade);
 
         if( raio.interno) 
             ponto.normal = ponto.normal.vezes(-1);
@@ -178,9 +178,9 @@ public class GIluminationTracer extends Raytracer{
       //APENAS FUNCIONA PARA VALORES DE Y NEGATIVOS, GENERALIZAR DEPOIS
       for(Fonte fonte : cena.fontes){
 
-        Vetor direcao = new Vetor(2*rand.nextDouble() - 1, -rand.nextDouble(), 2*rand.nextDouble() - 1);
+        Vetor direcao = new Vetor(1 - 2*rand.nextDouble(), -rand.nextDouble(), 1 - 2*rand.nextDouble());
 
-        Ponto photonColision = cena.objetos.colisao(fonte.posicao, direcao);
+        Ponto photonColision = cena.objetos.colisao(fonte.posicao, direcao.unitario());
 
         if(photonColision == null) continue;
 

@@ -54,7 +54,9 @@ public class Extensa extends Fonte {
                              .mais(T1.P3.vezes(t3))
                              .mais(T2.P3.vezes(t4));
         
-        Fonte pontual = new Fonte(posicao.valores)
+        Fonte pontual = new Spot(posicao.valores)
+                            .setAngulo(90)
+                            .setDirecao(T1.n.vezes(-1).valores)
                             .setCor(If.vezes(1/samples).valores);
 
         return pontual;

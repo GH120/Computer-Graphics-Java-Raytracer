@@ -57,10 +57,10 @@ public class Teste3 extends Cena{
     FontesExtensas(
 
       new Extensa(
-            new Vetor(-300,750,-1000),
-            new Vetor(300,750,-1000),
-            new Vetor(300, 750, -1300),
-            new Vetor(-300,750, -1300)
+            new Vetor(-400,750,-1000),
+            new Vetor(400,750,-1000),
+            new Vetor(400, 750, -1600),
+            new Vetor(-400,750, -1600)
       )
 
     );

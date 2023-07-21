@@ -50,9 +50,9 @@ public class Teste extends Cena{
 
     background = new Vetor(0.1,0.1,0.1);
 
-    Fontes(
-      new Fonte(-100, 140, -20).setCor(0.5f,0.5f,0.5f)
-    );
+    // Fontes(
+    //   new Fonte(-100, 140, -20).setCor(0.5f,0.5f,0.5f)
+    // );
 
     FontesExtensas(
 

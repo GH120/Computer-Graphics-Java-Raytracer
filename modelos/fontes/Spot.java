@@ -12,15 +12,19 @@ public class Spot extends Direcional{
 
   public Vetor luz(Ponto ponto, Vetor v){
 
-    Vetor d = ponto.pos.menos(posicao).unitario();
-
-    Vetor l = direcao.unitario();
+    Vetor l = ponto.pos.menos(posicao).unitario();
 
     double abertura = Math.cos(Math.toRadians(angulo));
     
-    if(l.escalar(d) < abertura) return new Vetor(0,0,0);
+    if(direcao.unitario().escalar(l) < abertura) return new Vetor(0,0,0);
 
-    return super.luz(ponto,v);
+    Vetor n = ponto.normal.unitario();
+    
+    if(l.escalar(n) > 0) return new Vetor(0,0,0);
+
+    Vetor Ieye = difusa(n,l,ponto.getKd()).mais(especular(n,v,l,ponto.getKe()));
+
+    return Ieye;
   }
 
   public Spot setAngulo(double angulo){
