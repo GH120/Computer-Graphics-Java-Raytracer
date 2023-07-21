@@ -16,10 +16,8 @@ public abstract class Malha extends Conjunto{
   public List<int[]>   LF = new ArrayList<>();
 
   public Malha construir(){
-    int i = 0;
     for(int[] face : LF){
       componentes.add(gerarTriangulo(face));
-      System.out.println(i++);
     }
     return this;
   }
@@ -152,7 +150,7 @@ public abstract class Malha extends Conjunto{
 
     if(LF.size() < 4) return this.construir();
 
-    int n = 3;
+    int n = 2;
 
     Conjunto[] objetos = new Conjunto[n];
 

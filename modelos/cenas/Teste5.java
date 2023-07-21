@@ -5,18 +5,23 @@ import modelos.fontes.*;
 import modelos.objetos.*;
 import modelos.reflexoes.*;
 
-public class Teste extends Cena{
+public class Teste5 extends Cena{
 
-  public Teste(){
+  public Teste5(){
     
     Objetos(
 
-            new Esfera(0, 0, -200)
-            .setRaio(100)
-            .setKe(1,1,1)
-            .setKd(1,1,1)
-            .setKa(1,1,1)
-                    // .addReflection(new Difusa())
+            new MalhaOBJ("car.obj")
+            .construir()
+            .BoundingVolume()
+            .setKe(0.752,0.0549,0.10196)
+            .setKa(0.752,0.0549,0.10196)
+            .setKd(0.752,0.0549,0.10196)
+            .aplicar(
+                new RotacaoY(-10),
+                new Escala(100,100,100),
+                new Translacao(-20,-1000,-1000)
+            )
             ,
 
             new Plano(2000,-1500,-4000)
@@ -57,10 +62,10 @@ public class Teste extends Cena{
     FontesExtensas(
 
       new Extensa(
-            new Vetor(0,1000,0),
-            new Vetor(100,1000,0),
-            new Vetor(100, 1000, -100),
-            new Vetor(0,1000, -100)
+            new Vetor(-400,750,-1000),
+            new Vetor(400,750,-1000),
+            new Vetor(400, 750, -1600),
+            new Vetor(-400,750, -1600)
       )
 
     );

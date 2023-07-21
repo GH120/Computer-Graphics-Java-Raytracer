@@ -21,8 +21,8 @@ class Main {
 
 
     rodarPrograma(
-              new Teste4(),                //Cena escolhida
-              new ConcurrentRaytracer(new Raycaster()),                  //Raytracer escolhido
+              new Teste6(),                //Cena escolhida
+              new Pathtracer(2),                  //Raytracer escolhido
               350, 350,                    //Resolução
               CAMERA_PERSPECTIVA                        //Câmera da cena escolhida
       );
