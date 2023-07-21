@@ -107,7 +107,7 @@ public class ConcurrentRaytracer extends Raytracer{
               
               Vetor cor = buscarCor(raio, linhasDoProcesso);
 
-              System.out.println("linha" + l);
+              // System.out.println("linha" + l);
               // System.out.println("coluna" + c); 
               
               linhasBuffer[l][c].add(cor);

@@ -1,5 +1,8 @@
 package modelos.objetos;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import algebra.*;
 import miniball.Miniball;
@@ -10,7 +13,7 @@ public abstract class Malha extends Conjunto{
   
   public ArrayList<Vetor>   LV = new ArrayList<>();
   public ArrayList<int[]>   LA = new ArrayList<>();
-  public ArrayList<int[]>   LF = new ArrayList<>();
+  public List<int[]>   LF = new ArrayList<>();
 
   public Malha construir(){
     int i = 0;
@@ -111,7 +114,21 @@ public abstract class Malha extends Conjunto{
     return this;
   }
 
-  public Objeto BoundingVolume(){
+  public Conjunto BoundingVolume(){
+
+    HashSet<Integer> v = new HashSet<>();
+
+    for(int[] face : LF){
+      v.add(face[0]);
+      v.add(face[1]);
+      v.add(face[2]);
+    }
+
+    ArrayList<Vetor> novo = new ArrayList<>();
+
+    for(int i : v){
+      novo.add(LV.get(i));
+    }
     
     var vertices = new PointSet(){
 
@@ -120,11 +137,11 @@ public abstract class Malha extends Conjunto{
       }
 
       public int size(){
-        return LV.size();
+        return novo.size();
       }
 
       public double coord(int i, int j) {
-        return LV.get(i).get(j);
+        return novo.get(i).get(j);
       }
     };
 
@@ -133,7 +150,28 @@ public abstract class Malha extends Conjunto{
     Esfera esfera = new Esfera(BoundingSphere.center())
                       .setRaio(BoundingSphere.radius());
 
-    return new Conjunto(this).setFronteira(esfera);
+    if(LF.size() < 4) return this.construir();
+
+    int n = 3;
+
+    Conjunto[] objetos = new Conjunto[n];
+
+    for(int i = 0; i < n; i++){
+
+      int size = LF.size()/n;
+      int end  = (i == n-1)? LF.size() : size*(i+1);
+
+      Malha submalha = new MalhaOBJ();
+
+      submalha.LV = LV;
+      submalha.LF = LF.subList(size*i, end);
+      
+      Conjunto boundingVolume = submalha.BoundingVolume();
+
+      objetos[i] = boundingVolume;
+    }
+
+    return new Conjunto(objetos).setFronteira(esfera);
   }
 
 }

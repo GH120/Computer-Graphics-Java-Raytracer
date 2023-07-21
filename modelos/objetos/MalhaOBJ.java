@@ -6,6 +6,10 @@ import java.io.IOException;
 
 public class MalhaOBJ extends Malha {
 
+    public MalhaOBJ(){
+        
+    }
+
     public MalhaOBJ(String filePath) {
         try {
             readObjFile(filePath);
