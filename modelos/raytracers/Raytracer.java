@@ -34,12 +34,11 @@ public abstract class Raytracer{
     //Adiciona as contribuições das luzes ao ponto colido
     for(Fonte fonte : cena.fontes){
       
-      if(!sombra(fonte, ponto)){
+      // if(!sombra(fonte, ponto)){
         
         luz = luz.mais(fonte.luz(ponto, viewer));
 
-        // if(fonte.luz(ponto, viewer).valores[0] < 0) luz = new Vetor(1,1,1);
-      }
+      // }
     }
 
     return luz;

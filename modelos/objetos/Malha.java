@@ -133,7 +133,7 @@ public abstract class Malha extends Conjunto{
     Esfera esfera = new Esfera(BoundingSphere.center())
                       .setRaio(BoundingSphere.radius());
 
-    return esfera;
+    return new Conjunto(this).setFronteira(esfera);
   }
 
 }

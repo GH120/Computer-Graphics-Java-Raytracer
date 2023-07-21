@@ -18,7 +18,7 @@ public class Extensa extends Fonte {
 
         If = new Vetor(1,1,1);
 
-        samples = 10;
+        samples = 50;
         
         T1 = new Triangulo(p1.valores).setP2(p2.valores).setP3(p3.valores);
 

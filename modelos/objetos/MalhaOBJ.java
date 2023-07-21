@@ -57,13 +57,15 @@ public class MalhaOBJ extends Malha {
                 }
             }
         }
+
+        System.out.println("tamanho: " + LF.size());
         reader.close();
     }
  
     //Provavelmente o erro está aqui
     private int parseIndex(String indexString) {
         int index = Integer.parseInt(indexString);
-        return (index >= 0) ? index : LV.size() + index ;
+        return (index >= 0) ? index - 1 : LV.size() + index ;
     }
 
     //Nesse caso, construimos a face com os vértices ao invés das arestas
