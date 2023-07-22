@@ -47,4 +47,11 @@ public class Fonte{
     
     return ((If.mult(Ke)).vezes(fe));
   }
+
+  public void printar(){
+    System.out.println("posição");
+    posicao.printar();
+    System.out.println("intensidade");
+    If.printar();
+  }
 }

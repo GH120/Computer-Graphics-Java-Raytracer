@@ -31,4 +31,10 @@ public class Spot extends Direcional{
     this.angulo = angulo;
     return this;
   }
+
+  public void printar(){
+    super.printar();
+    System.out.println("Direção");
+    direcao.printar();
+  }
 }

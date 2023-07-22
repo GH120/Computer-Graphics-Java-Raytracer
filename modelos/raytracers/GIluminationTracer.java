@@ -173,29 +173,33 @@ public class GIluminationTracer extends Raytracer{
 
       ArrayList<Fonte> photons = new ArrayList<>();
 
-      double atenuacao = 0.5;
+      double atenuacao = 0.001;
 
       //APENAS FUNCIONA PARA VALORES DE Y NEGATIVOS, GENERALIZAR DEPOIS
-      for(int i=0; i < 1; i++)
+      for(int i=0; i < 1000; i++)
       for(Fonte fonte : cena.fontes){
 
         Vetor direcao = new Vetor(1 - 2*rand.nextDouble(), -rand.nextDouble(), 1 - 2*rand.nextDouble());
 
         Ponto photonColision = cena.objetos.colisao(fonte.posicao, direcao.unitario());
 
-        // photonColision.printar();
-
         if(photonColision == null) continue;
 
-        Fonte stickyPhoton = new Fonte(photonColision.pos.valores);
+        Fonte stickyPhoton = new Spot(photonColision.pos.mais(direcao.vezes(-5)).valores)
+                                .setAngulo(90)
+                                .setDirecao(photonColision.normal.valores);
 
         stickyPhoton.If = photonColision.getKd().mult(fonte.If).vezes(atenuacao);
+
+        stickyPhoton.printar();
 
         photons.add(stickyPhoton);
       }
       
       for(Fonte photon : photons){
         cena.fontes.add(photon);
+        photon.posicao.printar();
+        photon.If.printar();
       }
     }
 

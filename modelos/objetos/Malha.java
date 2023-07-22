@@ -148,9 +148,9 @@ public abstract class Malha extends Conjunto{
     Esfera esfera = new Esfera(BoundingSphere.center())
                       .setRaio(BoundingSphere.radius());
 
-    if(LF.size() < 4) return this.construir();
+    if(LF.size() < 9) return this.construir();
 
-    int n = 2;
+    int n = 3;
 
     Conjunto[] objetos = new Conjunto[n];
 

@@ -200,6 +200,16 @@ public class Vetor{
     return valores[i];
   }
 
+  public double getX(){
+    return valores[0];
+  }
+  public double getY(){
+    return valores[1];
+  }
+  public double getZ(){
+    return valores[2];
+  }
+
   public double[] eixos(){
     return Arrays.copyOfRange(valores,0,3);
   }

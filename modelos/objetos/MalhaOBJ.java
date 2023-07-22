@@ -7,7 +7,7 @@ import java.io.IOException;
 public class MalhaOBJ extends Malha {
 
     public MalhaOBJ(){
-        
+
     }
 
     public MalhaOBJ(String filePath) {
@@ -49,7 +49,7 @@ public class MalhaOBJ extends Malha {
                 //Adiciona a face relacionada as últimas arestas adicionadas
                 addFace(v1, v2, v3);
 
-                System.out.println("v1: " + v1 + " v2: " + v2 + " v3: " + v3);
+                // System.out.println("v1: " + v1 + " v2: " + v2 + " v3: " + v3);
 
                 //Se for uma malha de quadrilateros
                 if(parts.length == 5){
