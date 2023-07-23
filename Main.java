@@ -19,13 +19,15 @@ class Main {
 
     // for(int i=0; i < extensa.samples; i++) extensa.sample().posicao.printar();
 
+    new CompostoToJson(new MalhaOBJ("mesa.obj").BoundingVolume());
 
-    rodarPrograma(
-              new Teste7(),                             //Cena escolhida
-              new ConcurrentRaytracer(new GIluminationTracer()),                          //Raytracer escolhido
-              700, 700,                    //Resolução
-              CAMERA_PERSPECTIVA                        //Câmera da cena escolhida
-      );
+
+    // rodarPrograma(
+    //           new Teste7(),                             //Cena escolhida
+    //           new ConcurrentRaytracer(new GIluminationTracer()),                          //Raytracer escolhido
+    //           700, 700,                    //Resolução
+    //           CAMERA_PERSPECTIVA                        //Câmera da cena escolhida
+    //   );
 
       // new Teste();
 

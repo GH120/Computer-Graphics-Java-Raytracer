@@ -8,7 +8,7 @@ import java.util.ArrayList;
 //Visa economizar processamento ignorando regiões onde não haveria colisões usando a fronteira como fácil medidor
 public class Conjunto extends Composto{
 
-  Objeto fronteira;
+  public Objeto fronteira;
   Objeto disjuncao;
 
   public Conjunto(Objeto ...objetos){

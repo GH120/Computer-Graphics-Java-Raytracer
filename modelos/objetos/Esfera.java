@@ -5,7 +5,7 @@ import modelos.*;
 public class Esfera extends ObjetoSimples{
   
   public Vetor centro;
-  double raio;
+  public double raio;
   
 
   public Esfera(double... eixos){
