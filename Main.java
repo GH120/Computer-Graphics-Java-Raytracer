@@ -17,19 +17,16 @@ class Main {
   
   public static void main(String[] args) {
 
-    // for(int i=0; i < extensa.samples; i++) extensa.sample().posicao.printar();
-
-    new CompostoToJson(new MalhaOBJ("mesa.obj").BoundingVolume());
 
 
-    // rodarPrograma(
-    //           new Teste7(),                             //Cena escolhida
-    //           new ConcurrentRaytracer(new GIluminationTracer()),                          //Raytracer escolhido
-    //           700, 700,                    //Resolução
-    //           CAMERA_PERSPECTIVA                        //Câmera da cena escolhida
-    //   );
 
-      // new Teste();
+    rodarPrograma(
+              new NatalOtimizado(),                             //Cena escolhida
+              new ConcurrentRaytracer(new Pathtracer(20)), //Raytracer escolhido
+              700, 700,                            //Resolução
+              CAMERA_PERSPECTIVA                                //Câmera da cena escolhida
+      );
+
 
   }
 
@@ -40,7 +37,7 @@ class Main {
 
       new Programa().setCena(
                             cena
-                            .luzAmbiente(0.1,0.1,0.1)
+                            .luzAmbiente(0.2,0.2,0.2)
                   )
                   .setTracer(tracer)
                   .getCamera(index)

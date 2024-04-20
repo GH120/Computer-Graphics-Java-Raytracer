@@ -1,8 +1,0 @@
-{
-    "files.exclude": {
-        "**/*.class": true
-    },
-    "java.project.sourcePaths": [
-        "."
-    ]
-}
