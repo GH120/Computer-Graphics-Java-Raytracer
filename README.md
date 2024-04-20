@@ -1,3 +1,6 @@
+![image](https://github.com/GH120/Computer-Graphics-Java-Renderer/assets/90730714/be0d6586-7585-4f05-a8e3-af11b12bb143)
+
+
 # Instalação e Execução
 Precisa apenas do Java e JDK instalados
 
