@@ -8,13 +8,14 @@ Para escolher a cena,o modelo de renderização e as dimensões da imagem, basta
 ![image](https://github.com/GH120/Computer-Graphics-Java-Renderer/assets/90730714/cebcb917-bb62-4c20-8a19-a7a18c96d0de)
 
 # Features:
-- Raytracing
+- Raytracing usando MonteCarlo
 - Importação de Modelos OBJ
 - Raycasters, Raytracers, Raytracers paralelos e Raytracers com iluminação global
 - Fontes pontuais, direcionais, spot e extensas
+- Reflexões Especulares, Glossy e Refração
 - Texturas como wrappers para objetos
 - Matrizes e aplicação de matrizes em malhas (Escala, translação, rotação ,cisalhamento...)
-- Clusterização para otimização de malhas extensas (conseguimos importar malhas com mais de 25000 polígonos em tempo logarítimico)
+- Clusterização para otimização de malhas extensas usando BVH (conseguimos importar malhas com mais de 25000 polígonos em tempo logarítimico)
 - Customização de Cenas e Objetos
 
 # Customização
