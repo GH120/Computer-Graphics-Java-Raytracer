@@ -8,30 +8,31 @@ Para escolher a cena,o modelo de renderização e as dimensões da imagem, basta
 ![image](https://github.com/GH120/Computer-Graphics-Java-Renderer/assets/90730714/cebcb917-bb62-4c20-8a19-a7a18c96d0de)
 
 # Features:
--> Raytracing
--> Importação de Modelos OBJ
--> Raycasters, Raytracers, Raytracers paralelos e Raytracers com iluminação global
--> Fontes pontuais, direcionais, spot e extensas
--> Texturas como wrappers para objetos
--> Clusterização para otimização de malhas extensas (conseguimos importar malhas com mais de 25000 polígonos em tempo logarítimico)
--> Customização de Cenas e Objetos
+- Raytracing
+- Importação de Modelos OBJ
+- Raycasters, Raytracers, Raytracers paralelos e Raytracers com iluminação global
+- Fontes pontuais, direcionais, spot e extensas
+- Texturas como wrappers para objetos
+- Matrizes e aplicação de matrizes em malhas (Escala, translação, rotação ,cisalhamento...)
+- Clusterização para otimização de malhas extensas (conseguimos importar malhas com mais de 25000 polígonos em tempo logarítimico)
+- Customização de Cenas e Objetos
 
 # Customização
 
 Cenas são altamente customizaveis, basta criar uma classe que herda de cena e escolher suas configurações no construtor
 
+- Os objetos são configurados chamando a função Objetos(...) que aceita n objetos separados por vírgula.
+- As fontes pontuais são configuradas chamando a função Fontes(...) que aceita n fontes separadas por vírgula.
+- As fontes extensas são configuradas chamando a função FontesExtensas(...) que aceita n fontes separadas por vírgula.
+- As cameras são configuradas chamando a função Cameras(...) que aceita n cameras separadas por vírgula.
+
+Qualquer dúvida melhor copiar uma cena existente e modificar pontualmente
+-
+
 ![image](https://github.com/GH120/Computer-Graphics-Java-Renderer/assets/90730714/2d98d052-2321-45d1-9888-1bd6bb80e483)
 ![image](https://github.com/GH120/Computer-Graphics-Java-Renderer/assets/90730714/800c39c5-f43c-4597-ae63-bce5e7ffa258)
 ![image](https://github.com/GH120/Computer-Graphics-Java-Renderer/assets/90730714/58652eac-789e-4b11-a13f-274cbe84d61e)
 
-
-
-Os objetos são configurados chamando a função Objetos(...) que aceita n objetos separados por vírgula
-As fontes pontuais são configuradas chamando a função Fontes(...) que aceita n fontes separadas por vírgula
-As fontes extensas são configuradas chamando a função FontesExtensas(...) que aceita n fontes separadas por vírgula
-As cameras são configuradas chamando a função Cameras(...) que aceita n cameras separadas por vírgula
-
-Qualquer dúvida melhor copiar uma cena existente e modificar pontualmente
 
 # Funcionalidade do modelo de renderização
 ![Modelo de Renderização](https://user-images.githubusercontent.com/90730714/234678379-7ff2dcb5-c83b-4cc2-b544-684c9ed79d23.jpeg)
