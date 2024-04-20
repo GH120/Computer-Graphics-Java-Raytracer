@@ -18,7 +18,7 @@ Para escolher a cena,o modelo de renderização e as dimensões da imagem, basta
 - Reflexões Especulares, Glossy e Refração
 - Texturas como wrappers para objetos
 - Matrizes e aplicação de matrizes em malhas (Escala, translação, rotação ,cisalhamento...)
-- Clusterização para otimização de malhas extensas usando BVH (conseguimos importar malhas com mais de 25000 polígonos em tempo logarítimico)
+- Clusterização para otimização de malhas extensas usando BVH pelo algoritmo da Miniball(conseguimos importar malhas com mais de 25000 polígonos em tempo logarítimico)
 - Customização de Cenas e Objetos
 
 # Customização
